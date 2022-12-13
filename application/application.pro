@@ -3,17 +3,16 @@ TARGET = testgtk
 CONFIG = c11 link_pkgconfig
 PKGCONFIG = gtk+-3.0
 
-#DEFINES = GTK
-#INCLUDEPATH = /home/hotnuma/DevFiles/scintilla/include
-
 HEADERS = \
     application.h \
-    config.h
+    config.h \
+    window.h \
 
 SOURCES = \
     0Temp.c \
     application.c \
     main.c \
+    window.c \
 
 DISTFILES = \
     install.sh \

@@ -3,7 +3,6 @@
 
 #define UNUSED(x) (void)(x)
 
-
 #endif // CONFIG_H
 
 

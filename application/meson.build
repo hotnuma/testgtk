@@ -21,6 +21,7 @@ app_deps = [
 app_sources = [
     'application.c',
     'main.c',
+    'window.c',
 ]
 
 executable(
