@@ -1,0 +1,154 @@
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:g_malloc
+   fun:g_memdup
+   obj:/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2404.21
+   fun:gtk_style_context_set_state
+   obj:/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2404.21
+   obj:/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2404.21
+   obj:/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.6800.1
+   fun:g_object_new_valist
+   fun:g_object_new
+   obj:/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2404.21
+   fun:gtk_style_new
+   fun:gtk_widget_get_default_style
+   obj:/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2404.21
+   fun:g_type_create_instance
+   obj:/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.6800.1
+   fun:g_object_new_valist
+   fun:g_object_new
+   fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:g_malloc
+   obj:/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2404.21
+   obj:/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2404.21
+   fun:gtk_style_context_add_class
+   obj:/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2404.21
+   obj:/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2404.21
+   obj:/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.6800.1
+   fun:g_object_new_valist
+   fun:g_object_new
+   obj:/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2404.21
+   fun:gtk_style_new
+   fun:gtk_widget_get_default_style
+   obj:/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2404.21
+   fun:g_type_create_instance
+   obj:/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.6800.1
+   fun:g_object_new_valist
+   fun:g_object_new
+   fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:g_malloc
+   obj:/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2404.21
+   obj:/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2404.21
+   fun:gtk_style_context_add_class
+   obj:/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2404.21
+   obj:/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2404.21
+   obj:/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2404.21
+   obj:/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.6800.1
+   fun:g_object_new_valist
+   fun:g_object_new
+   obj:/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2404.21
+   fun:gtk_style_new
+   fun:gtk_widget_get_default_style
+   obj:/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2404.21
+   fun:g_type_create_instance
+   obj:/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.6800.1
+   fun:g_object_new_valist
+   fun:g_object_new
+   fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:malloc
+   fun:g_malloc
+   obj:/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2404.21
+   obj:/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2404.21
+   fun:gtk_style_context_add_class
+   obj:/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2404.21
+   obj:/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2404.21
+   obj:/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2404.21
+   obj:/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.6800.1
+   fun:g_object_new_valist
+   fun:g_object_new
+   obj:/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2404.21
+   fun:gtk_style_new
+   fun:gtk_widget_get_default_style
+   obj:/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2404.21
+   fun:g_type_create_instance
+   obj:/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.6800.1
+   fun:g_object_new_valist
+   fun:g_object_new
+   fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:calloc
+   fun:allocate_dtv
+   fun:_dl_allocate_tls
+   fun:allocate_stack
+   fun:pthread_create@@GLIBC_2.2.5
+   obj:/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.6800.1
+   fun:g_thread_new
+   obj:/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.6800.1
+   obj:/usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.6800.1
+   fun:g_task_get_type
+   obj:/usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.6800.1
+   fun:g_bus_get_sync
+   obj:/usr/lib/x86_64-linux-gnu/gio/modules/libgvfsdbus.so
+   fun:g_type_create_instance
+   obj:/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.6800.1
+   fun:g_object_new_with_properties
+   fun:g_object_new
+   obj:/usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.6800.1
+   obj:/usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.6800.1
+   fun:g_vfs_get_default
+   fun:g_file_new_for_uri
+   fun:gtk_css_provider_load_from_resource
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:calloc
+   fun:allocate_dtv
+   fun:_dl_allocate_tls
+   fun:allocate_stack
+   fun:pthread_create@@GLIBC_2.2.5
+   obj:/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.6800.1
+   fun:g_thread_new
+   obj:/usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.6800.1
+   fun:g_bus_get_sync
+   obj:/usr/lib/x86_64-linux-gnu/gio/modules/libgvfsdbus.so
+   fun:g_type_create_instance
+   obj:/usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.6800.1
+   fun:g_object_new_with_properties
+   fun:g_object_new
+   obj:/usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.6800.1
+   obj:/usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.6800.1
+   fun:g_vfs_get_default
+   fun:g_file_new_for_uri
+   fun:gtk_css_provider_load_from_resource
+   obj:/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2404.21
+   obj:/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2404.21
+   obj:/usr/lib/x86_64-linux-gnu/libgtk-3.so.0.2404.21
+}

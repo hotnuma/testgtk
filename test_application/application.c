@@ -34,6 +34,7 @@ static void application_class_init(ApplicationClass *klass)
     GApplicationClass *gapplication_class = G_APPLICATION_CLASS(klass);
     gapplication_class->startup = _application_startup;
     gapplication_class->shutdown = _application_shutdown;
+
     gapplication_class->activate = _application_activate;
     gapplication_class->command_line = _application_command_line;
 }
@@ -42,13 +43,11 @@ static void application_init(Application *application)
 {
     g_application_set_flags(G_APPLICATION(application),
                             G_APPLICATION_HANDLES_COMMAND_LINE);
-
-    //g_application_add_main_option_entries(G_APPLICATION(application), option_entries);
 }
 
 static void _application_finalize(GObject *object)
 {
-    (*G_OBJECT_CLASS(application_parent_class)->finalize)(object);
+    G_OBJECT_CLASS(application_parent_class)->finalize(object);
 }
 
 static void _application_startup(GApplication *gapp)
@@ -68,7 +67,7 @@ Application* application_get()
     if (default_app)
         return APPLICATION(g_object_ref(default_app));
     else
-        return g_object_ref_sink(g_object_new(TYPE_APPLICATION,
+        return g_object_ref_sink(g_object_new(APPLICATION_TYPE,
                                               "application-id",
                                               "org.hotnuma.Application",
                                               NULL));
@@ -82,7 +81,8 @@ static void _application_activate(GApplication *gapp)
     G_APPLICATION_CLASS(application_parent_class)->activate(gapp);
 }
 
-static int _application_command_line(GApplication *gapp, GApplicationCommandLine *command_line)
+static int _application_command_line(GApplication *gapp,
+                                     GApplicationCommandLine *command_line)
 {
     UNUSED(gapp);
     UNUSED(command_line);
@@ -93,7 +93,7 @@ static int _application_command_line(GApplication *gapp, GApplicationCommandLine
 
     application_window_open(APPLICATION(gapp));
 
-    return EXIT_SUCCESS;
+    return 0;
 }
 
 GtkWidget* application_window_open(Application *application)
