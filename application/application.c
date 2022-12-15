@@ -67,7 +67,7 @@ Application* application_get()
     if (default_app)
         return APPLICATION(g_object_ref(default_app));
     else
-        return g_object_ref_sink(g_object_new(APPLICATION_TYPE,
+        return g_object_ref_sink(g_object_new(TYPE_APPLICATION,
                                               "application-id",
                                               "org.hotnuma.Application",
                                               NULL));
