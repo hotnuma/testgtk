@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-BASEDIR="$( dirname -- "$( readlink -f -- "$0"; )" )"
+BASEDIR="$(dirname -- "$(readlink -f -- "$0";)")"
 
 dest=$BASEDIR/build
 if [[ -d $dest ]]; then
