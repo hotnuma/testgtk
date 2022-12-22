@@ -19,11 +19,13 @@ endif
 
 app_deps = [
     dependency('gtk+-3.0'),
+    dependency('tinyc'),
 ]
 
 app_sources = [
     'application.c',
     'main.c',
+    'preferences.c',
     'window.c',
 ]
 

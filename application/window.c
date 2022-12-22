@@ -1,5 +1,6 @@
 #include "window.h"
 #include "config.h"
+#include "preferences.h"
 
 #include <gtk/gtk.h>
 
@@ -35,28 +36,21 @@ static void window_class_init(WindowClass *klass)
 
 static void window_init(Window *window)
 {
-    g_signal_connect(window, "delete-event", G_CALLBACK(_window_on_delete), NULL);
+    g_signal_connect(window, "delete-event",
+                     G_CALLBACK(_window_on_delete), NULL);
 
-    gint last_window_width = 640;
-    gint last_window_height = 480;
+    Preferences *prefs = get_preferences();
 
     gtk_window_set_default_size(GTK_WINDOW(window),
-                                last_window_width,
-                                last_window_height);
+                                prefs->window_width,
+                                prefs->window_height);
 
-    gboolean last_window_maximized = FALSE;
-
-    if (G_UNLIKELY(last_window_maximized))
+    if (G_UNLIKELY(prefs->window_maximized))
         gtk_window_maximize(GTK_WINDOW(window));
-
-    // Create widgets...
-
 }
 
 static void _window_dispose(GObject *object)
 {
-    //Window  *window = WINDOW(object);
-
     // do something...
 
     (*G_OBJECT_CLASS(window_parent_class)->dispose)(object);
@@ -64,8 +58,6 @@ static void _window_dispose(GObject *object)
 
 static void _window_finalize(GObject *object)
 {
-    //Window *window = WINDOW(object);
-
     // do something...
 
     (*G_OBJECT_CLASS(window_parent_class)->finalize)(object);
@@ -75,15 +67,11 @@ static void window_realize(GtkWidget *widget)
 {
     (*GTK_WIDGET_CLASS(window_parent_class)->realize)(widget);
 
-    //Window *window = WINDOW(widget);
-
     // do something...
 }
 
 static void window_unrealize(GtkWidget *widget)
 {
-    //Window *window = WINDOW(widget);
-
     // do something...
 
     (*GTK_WIDGET_CLASS(window_parent_class)->unrealize)(widget);
@@ -91,11 +79,30 @@ static void window_unrealize(GtkWidget *widget)
 
 static gboolean _window_on_delete(GtkWidget *widget, GdkEvent *event, gpointer data)
 {
-    UNUSED(widget);
     UNUSED(event);
     UNUSED(data);
 
-    return FALSE;
+    Preferences *prefs = get_preferences();
+    GtkWindow *window = GTK_WINDOW(widget);
+
+    if (gtk_widget_get_visible(GTK_WIDGET(widget)))
+    {
+        GdkWindowState state = gdk_window_get_state(
+                                            gtk_widget_get_window(widget));
+
+        prefs->window_maximized = ((state & (GDK_WINDOW_STATE_MAXIMIZED
+                                             | GDK_WINDOW_STATE_FULLSCREEN))
+                                    != 0);
+
+        if (!prefs->window_maximized)
+        {
+            gtk_window_get_size(window,
+                                &prefs->window_width,
+                                &prefs->window_height);
+        }
+    }
+
+    return false;
 }
 
 

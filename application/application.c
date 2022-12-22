@@ -1,13 +1,12 @@
 #include "application.h"
 #include "config.h"
-
+#include "preferences.h"
 #include "window.h"
 #include <gtk/gtk.h>
 
 static void _application_finalize(GObject *object);
 static void _application_startup(GApplication *application);
 static void _application_shutdown(GApplication *application);
-static void _application_activate(GApplication *application);
 static int _application_command_line(GApplication *application,
                                      GApplicationCommandLine *command_line);
 
@@ -34,8 +33,6 @@ static void application_class_init(ApplicationClass *klass)
     GApplicationClass *gapplication_class = G_APPLICATION_CLASS(klass);
     gapplication_class->startup = _application_startup;
     gapplication_class->shutdown = _application_shutdown;
-
-    gapplication_class->activate = _application_activate;
     gapplication_class->command_line = _application_command_line;
 }
 
@@ -50,35 +47,34 @@ static void _application_finalize(GObject *object)
     G_OBJECT_CLASS(application_parent_class)->finalize(object);
 }
 
-static void _application_startup(GApplication *gapp)
-{
-    G_APPLICATION_CLASS(application_parent_class)->startup(gapp);
-}
-
-static void _application_shutdown(GApplication *gapp)
-{
-    G_APPLICATION_CLASS(application_parent_class)->shutdown(gapp);
-}
-
 Application* application_get()
 {
     GApplication *default_app = g_application_get_default();
 
     if (default_app)
+    {
         return APPLICATION(g_object_ref(default_app));
-    else
-        return g_object_ref_sink(g_object_new(TYPE_APPLICATION,
-                                              "application-id",
-                                              "org.hotnuma.Application",
-                                              NULL));
+    }
+
+    return g_object_ref_sink(g_object_new(TYPE_APPLICATION,
+                                          "application-id",
+                                          "org.hotnuma.Application",
+                                          NULL));
 }
 
-static void _application_activate(GApplication *gapp)
+static void _application_startup(GApplication *gapp)
 {
-    //g_print("application_activate\n");
-    //application_open_window(APPLICATION(gapp));
+    prefs_file_read();
 
-    G_APPLICATION_CLASS(application_parent_class)->activate(gapp);
+    G_APPLICATION_CLASS(application_parent_class)->startup(gapp);
+}
+
+static void _application_shutdown(GApplication *gapp)
+{
+    prefs_write();
+    prefs_cleanup();
+
+    G_APPLICATION_CLASS(application_parent_class)->shutdown(gapp);
 }
 
 static int _application_command_line(GApplication *gapp,
@@ -86,10 +82,6 @@ static int _application_command_line(GApplication *gapp,
 {
     UNUSED(gapp);
     UNUSED(command_line);
-
-    g_print("application_command_line\n");
-
-    //Application *application  = APPLICATION(gapp);
 
     application_window_open(APPLICATION(gapp));
 
