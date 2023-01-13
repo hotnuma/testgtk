@@ -1,5 +1,5 @@
-#include "preferences.h"
 #include "config.h"
+#include "preferences.h"
 #include "cinifile.h"
 
 #include <libpath.h>

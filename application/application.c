@@ -1,7 +1,7 @@
-#include "application.h"
 #include "config.h"
+#include "application.h"
+#include "appwindow.h"
 #include "preferences.h"
-#include "window.h"
 #include <gtk/gtk.h>
 
 static void _application_finalize(GObject *object);

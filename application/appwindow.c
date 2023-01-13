@@ -1,7 +1,6 @@
-#include "window.h"
 #include "config.h"
+#include "appwindow.h"
 #include "preferences.h"
-
 #include <gtk/gtk.h>
 
 static void _window_dispose(GObject *object);
@@ -11,19 +10,19 @@ static void window_unrealize(GtkWidget *widget);
 
 static gboolean _window_on_delete(GtkWidget *widget, GdkEvent *event, gpointer data);
 
-struct _WindowClass
+struct _AppWindowClass
 {
     GtkWindowClass __parent__;
 };
 
-struct _Window
+struct _AppWindow
 {
     GtkWindow __parent__;
 };
 
-G_DEFINE_TYPE(Window, window, GTK_TYPE_WINDOW)
+G_DEFINE_TYPE(AppWindow, window, GTK_TYPE_WINDOW)
 
-static void window_class_init(WindowClass *klass)
+static void window_class_init(AppWindowClass *klass)
 {
     GObjectClass *gobject_class = G_OBJECT_CLASS(klass);
     gobject_class->dispose = _window_dispose;
@@ -34,7 +33,7 @@ static void window_class_init(WindowClass *klass)
     gtkwidget_class->unrealize = window_unrealize;
 }
 
-static void window_init(Window *window)
+static void window_init(AppWindow *window)
 {
     g_signal_connect(window, "delete-event",
                      G_CALLBACK(_window_on_delete), NULL);

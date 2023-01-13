@@ -14,7 +14,7 @@ c_args = [
 ]
 
 if get_option('buildtype') == 'plain'
-  c_args += '-O2'
+    c_args += '-O2'
 endif
 
 app_deps = [
@@ -24,9 +24,9 @@ app_deps = [
 
 app_sources = [
     'application.c',
+    'appwindow.c',
     'main.c',
     'preferences.c',
-    'window.c',
 ]
 
 executable(
