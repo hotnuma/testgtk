@@ -1,5 +1,8 @@
 #include <gtk/gtk.h>
 #include <stdbool.h>
+#include <cstring.h>
+#include <libpath.h>
+#include <libapp.h>
 
 enum
 {
@@ -10,23 +13,32 @@ enum
 
 static GtkListStore *_store;
 
-static bool _append_line(const gchar *icon_name, const gchar *text)
+static bool _append_line(const gchar *filename, const gchar *text)
 {
     if (!_store)
         return false;
 
-    GdkPixbuf *icon = gdk_pixbuf_new_from_file(icon_name, NULL);
-    if (!icon)
-    {
+    CStringAuto *dir = cstr_new("/usr/share/icons/hicolor/48x48/apps/");
+    CStringAuto *filepath = cstr_new_size(64);
+
+    path_join(filepath, c_str(dir), filename);
+
+    if (!file_exists(c_str(filepath)))
         return false;
-    }
+
+    GdkPixbuf *pix = gdk_pixbuf_new_from_file(c_str(filepath), NULL);
+
+    if (!pix)
+        return false;
 
     GtkTreeIter iter;
     gtk_list_store_append(_store, &iter);
     gtk_list_store_set(_store, &iter,
-                       COL_ICON, icon,
+                       COL_ICON, pix,
                        COL_TEXT, text,
                        -1);
+
+    g_object_unref(pix);
 
     return true;
 }
@@ -69,7 +81,7 @@ int main(int argc, char **argv)
     GtkWidget *view = create_treeview();
     gtk_container_add(GTK_CONTAINER(window), view);
 
-    //_append_line()
+    _append_line("geany.png", "Geany");
 
     gtk_widget_show_all(window);
 
