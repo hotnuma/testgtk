@@ -14,6 +14,12 @@ PKGCONFIG += tinyc
 SOURCES = \
     0Temp.c \
     main.c \
+    samples/iconlist.c \
+    samples/iconview.c \
+    samples/image.c \
+    samples/image2.c \
+    samples/listbox-dnd.c \
+    samples/listview.c
 
 DISTFILES += \
     install.sh \

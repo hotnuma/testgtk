@@ -11,8 +11,11 @@ project(
 c_args = [
     '-Wall',
     '-Wextra',
-    '-O2',
 ]
+
+if get_option('buildtype') == 'plain'
+  c_args += '-O2'
+endif
 
 # examples
 #dependency('libusb'),
