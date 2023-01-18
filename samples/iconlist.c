@@ -13,11 +13,10 @@ enum
 
 static GtkListStore* treeview_create(GtkWidget *window)
 {
-    GtkListStore *store = gtk_list_store_new(2, GDK_TYPE_PIXBUF, G_TYPE_STRING);
+    c_autounref GtkListStore *store;
+    store = gtk_list_store_new(2, GDK_TYPE_PIXBUF, G_TYPE_STRING);
 
     GtkWidget *view = gtk_tree_view_new_with_model(GTK_TREE_MODEL(store));
-
-    g_object_unref(store);
 
     GtkTreeViewColumn *col = gtk_tree_view_column_new();
     gtk_tree_view_column_set_title(col, "Title");
@@ -36,8 +35,6 @@ static GtkListStore* treeview_create(GtkWidget *window)
 
     gtk_tree_view_append_column(GTK_TREE_VIEW(view), col);
 
-    gtk_widget_show_all(view);
-
     gtk_container_add(GTK_CONTAINER(window), view);
 
     return store;
@@ -54,7 +51,7 @@ static bool _append_line(GtkListStore *store, const gchar *filename,
     if (!file_exists(c_str(filepath)))
         return false;
 
-    GdkPixbuf *pix = gdk_pixbuf_new_from_file(c_str(filepath), NULL);
+    c_autounref GdkPixbuf *pix = gdk_pixbuf_new_from_file(c_str(filepath), NULL);
 
     if (!pix)
         return false;
@@ -65,8 +62,6 @@ static bool _append_line(GtkListStore *store, const gchar *filename,
                        COL_ICON, pix,
                        COL_TEXT, text,
                        -1);
-
-    g_object_unref(pix);
 
     return true;
 }

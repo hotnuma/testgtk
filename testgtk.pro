@@ -14,6 +14,8 @@ PKGCONFIG += tinyc
 SOURCES = \
     0Temp.c \
     main.c \
+    samples/gio_app_info.c \
+    samples/gtk_appchooser.c \
     samples/iconlist.c \
     samples/iconview.c \
     samples/image.c \
