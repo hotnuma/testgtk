@@ -11,20 +11,16 @@ PKGCONFIG += tinyc
 #PKGCONFIG += dbus-1
 #PKGCONFIG += libxml-2.0
 
+HEADERS += \
+    appwindow.h \
+
 SOURCES = \
     0Temp.c \
+    appwindow.c \
     main.c \
-    samples/gio_app_info.c \
-    samples/gmenu.c \
-    samples/gtk_appchooser.c \
-    samples/iconview.c \
-    samples/image.c \
-    samples/image_saturate.c \
-    samples/listbox_dnd.c \
-    samples/listview.c \
-    zetcode/30-simplemenu.c
 
 DISTFILES += \
+    data/applist.desktop \
     install.sh \
     License.txt \
     meson.build \
