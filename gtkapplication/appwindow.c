@@ -10,11 +10,6 @@ static void window_unrealize(GtkWidget *widget);
 
 static gboolean _window_on_delete(GtkWidget *widget, GdkEvent *event, gpointer data);
 
-struct _AppWindowClass
-{
-    GtkWindowClass __parent__;
-};
-
 struct _AppWindow
 {
     GtkWindow __parent__;
@@ -52,19 +47,19 @@ static void _window_dispose(GObject *object)
 {
     // do something...
 
-    (*G_OBJECT_CLASS(window_parent_class)->dispose)(object);
+    G_OBJECT_CLASS(window_parent_class)->dispose(object);
 }
 
 static void _window_finalize(GObject *object)
 {
     // do something...
 
-    (*G_OBJECT_CLASS(window_parent_class)->finalize)(object);
+    G_OBJECT_CLASS(window_parent_class)->finalize(object);
 }
 
 static void window_realize(GtkWidget *widget)
 {
-    (*GTK_WIDGET_CLASS(window_parent_class)->realize)(widget);
+    GTK_WIDGET_CLASS(window_parent_class)->realize(widget);
 
     // do something...
 }
@@ -73,7 +68,7 @@ static void window_unrealize(GtkWidget *widget)
 {
     // do something...
 
-    (*GTK_WIDGET_CLASS(window_parent_class)->unrealize)(widget);
+    GTK_WIDGET_CLASS(window_parent_class)->unrealize(widget);
 }
 
 static gboolean _window_on_delete(GtkWidget *widget, GdkEvent *event, gpointer data)

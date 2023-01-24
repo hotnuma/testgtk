@@ -5,8 +5,8 @@
 
 #define UNUSED(x) (void)(x)
 
-#define APP_DISPLAY_NAME "TinyC"
-#define APP_NAME "tinyc"
+#define APP_DISPLAY_NAME "TestGtk"
+#define APP_NAME "testgtk"
 
 #endif // CONFIG_H
 

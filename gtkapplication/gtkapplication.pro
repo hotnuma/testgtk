@@ -1,5 +1,5 @@
 TEMPLATE = app
-TARGET = testgtk
+TARGET = gtkapplication
 CONFIG = c11 link_pkgconfig
 PKGCONFIG = gtk+-3.0 tinyc
 

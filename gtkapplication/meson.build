@@ -1,10 +1,10 @@
 project(
-    'testgtk',
+    'gtkapplication',
     ['c'],
     version : '1.0',
     license : 'GPL-2.0',
     default_options : [
-        'c_std=c11',
+        'c_std=c99',
     ],
 )
 
@@ -22,7 +22,7 @@ app_deps = [
     dependency('tinyc'),
 ]
 
-app_sources = [
+app_src = [
     'application.c',
     'appwindow.c',
     'main.c',
@@ -30,10 +30,10 @@ app_sources = [
 ]
 
 executable(
-    'testgtk',
+    meson.project_name(),
     c_args : c_args,
     dependencies : app_deps,
-    sources : app_sources,
+    sources : app_src,
 )
 
 

@@ -13,11 +13,6 @@ static int _application_command_line(GApplication *application,
 GtkWidget* application_window_open(Application *application);
 static void _application_window_take(Application *application, GtkWindow *window);
 
-struct _ApplicationClass
-{
-    GtkApplicationClass __parent__;
-};
-
 struct _Application
 {
     GtkApplication __parent__;
@@ -92,7 +87,7 @@ GtkWidget* application_window_open(Application *application)
 {
     g_return_val_if_fail(IS_APPLICATION(application), NULL);
 
-    GtkWidget *window = g_object_new(TYPE_WINDOW, NULL);
+    GtkWidget *window = g_object_new(TYPE_APPWINDOW, NULL);
 
     _application_window_take(application, GTK_WINDOW(window));
 
