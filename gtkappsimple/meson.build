@@ -1,5 +1,5 @@
 project(
-    'testgtk',
+    'gtkappsimple',
     ['c'],
     version : '1.0',
     license : 'GPL-2.0',

@@ -22,7 +22,6 @@ enum
 struct _AppWindow
 {
     GtkWindow __parent__;
-
 };
 
 G_DEFINE_TYPE(AppWindow, window, GTK_TYPE_WINDOW)
@@ -36,16 +35,14 @@ static void window_class_init(AppWindowClass *klass)
 
 static void _window_dispose(GObject *object)
 {
-    // do something...
+    //AppWindow *window = APPWINDOW(object);
 
     G_OBJECT_CLASS(window_parent_class)->dispose(object);
 }
 
 static void _window_finalize(GObject *object)
 {
-    AppWindow *window = APPWINDOW(object);
-
-    UNUSED(window);
+    //AppWindow *window = APPWINDOW(object);
 
     G_OBJECT_CLASS(window_parent_class)->finalize(object);
 }
@@ -97,9 +94,9 @@ static void window_init(AppWindow *window)
         gtk_window_maximize(GTK_WINDOW(window));
 #endif
 
-    gtk_window_set_title(GTK_WINDOW(window), "Test Gtk");
+    gtk_window_set_title(GTK_WINDOW(window), "Gtk App Simple");
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
-    gtk_container_set_border_width(GTK_CONTAINER(window), 10);
+    gtk_container_set_border_width(GTK_CONTAINER(window), 0);
     gtk_window_set_default_size(GTK_WINDOW(window), 640, 480);
 
     g_signal_connect(window, "delete-event",

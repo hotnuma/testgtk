@@ -1,5 +1,5 @@
 TEMPLATE = app
-TARGET = testgtk
+TARGET = gtkappsimple
 CONFIG = c99 link_pkgconfig
 DEFINES =
 INCLUDEPATH =
