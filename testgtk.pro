@@ -22,9 +22,10 @@ SOURCES = \
     samples/image_saturate.c \
     samples/listbox_dnd.c \
     samples/listview.c \
-    zetcode/20-simple.c \
-    zetcode/21-center.c \
-    zetcode/30-simplemenu.c
+    zetcode/020-simple.c \
+    zetcode/021-center.c \
+    zetcode/030-simplemenu.c \
+    zetcode/100-simpletextview.c
 
 DISTFILES += \
     install.sh \
