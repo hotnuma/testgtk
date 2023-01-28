@@ -25,7 +25,8 @@ SOURCES = \
     zetcode/020-simple.c \
     zetcode/021-center.c \
     zetcode/030-simplemenu.c \
-    zetcode/100-simpletextview.c
+    zetcode/100-simpletextview.c \
+    zetcode/22-icon.c
 
 DISTFILES += \
     install.sh \
