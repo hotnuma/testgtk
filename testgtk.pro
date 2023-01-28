@@ -22,6 +22,8 @@ SOURCES = \
     samples/image_saturate.c \
     samples/listbox_dnd.c \
     samples/listview.c \
+    zetcode/20-simple.c \
+    zetcode/21-center.c \
     zetcode/30-simplemenu.c
 
 DISTFILES += \
