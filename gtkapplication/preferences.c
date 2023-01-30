@@ -18,7 +18,7 @@ void prefs_cleanup()
     cstr_free(_prefs.filepath);
 }
 
-void prefs_file_read()
+Preferences* prefs_file_read()
 {
     if (!_prefs.filepath)
     {
@@ -38,6 +38,8 @@ void prefs_file_read()
     cinisection_int(section, &_prefs.window_width, "WindowWidth", 640);
     cinisection_int(section, &_prefs.window_height, "WindowHeight", 480);
     cinisection_int(section, &_prefs.window_maximized, "WindowMaximized", 0);
+
+    return &_prefs;
 }
 
 void prefs_write()

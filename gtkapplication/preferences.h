@@ -15,7 +15,7 @@ typedef struct
 Preferences* get_preferences();
 void prefs_cleanup();
 
-void prefs_file_read();
+Preferences* prefs_file_read();
 void prefs_write();
 
 #endif // PREFERENCES_H
