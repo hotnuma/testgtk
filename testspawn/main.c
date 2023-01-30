@@ -66,10 +66,16 @@ int main(int argc, char *argv[])
     gtk_window_set_default_size(GTK_WINDOW(window), 300, 200);
     gtk_window_set_title(GTK_WINDOW(window), "GtkTextView");
 
-    GtkWidget *vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-    gtk_container_add(GTK_CONTAINER(window), vbox);
+    GtkWidget *scroll = gtk_scrolled_window_new(NULL, NULL);
+    gtk_container_add(GTK_CONTAINER(window), scroll);
+    gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scroll),
+                                   GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+    gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scroll),
+                                        GTK_SHADOW_IN);
+
     GtkWidget *view = gtk_text_view_new();
-    gtk_box_pack_start(GTK_BOX(vbox), view, TRUE, TRUE, 0);
+
+    gtk_container_add(GTK_CONTAINER(scroll), view);
 
     buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(view));
 
