@@ -7,7 +7,9 @@ PKGCONFIG =
 
 PKGCONFIG += gtk+-3.0
 PKGCONFIG += tinyc
+
 #PKGCONFIG += glib-2.0
+PKGCONFIG += gudev-1.0
 #PKGCONFIG += dbus-1
 #PKGCONFIG += libxml-2.0
 
@@ -22,6 +24,8 @@ SOURCES = \
     samples/image_saturate.c \
     samples/listbox_dnd.c \
     samples/listview.c \
+    samples/redirect_widget.c \
+    samples/sys_gudev.c \
     zetcode/020-simple.c \
     zetcode/021-center.c \
     zetcode/030-simplemenu.c \

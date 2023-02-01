@@ -20,7 +20,6 @@ endif
 # examples
 #dependency('libusb'),
 #dependency('dbus-1'),
-#dependency('gudev-1.0'),
 #dependency('libxml-2.0'),
 
 app_deps = [
@@ -29,6 +28,7 @@ app_deps = [
     #dependency('libpcre'),
     #dependency('glib-2.0'),
     #dependency('gio-2.0'),
+    dependency('gudev-1.0'),
 ]
 
 app_src = [
