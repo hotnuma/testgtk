@@ -25,6 +25,7 @@ SOURCES = \
     samples/listbox_dnd.c \
     samples/listview.c \
     samples/redirect_widget.c \
+    samples/single_instance.c \
     samples/sys_gudev.c \
     zetcode/020-simple.c \
     zetcode/021-center.c \

@@ -23,12 +23,12 @@ endif
 #dependency('libxml-2.0'),
 
 app_deps = [
-    dependency('gtk+-3.0'),
+    #dependency('gtk+-3.0'),
     dependency('tinyc'),
     #dependency('libpcre'),
-    #dependency('glib-2.0'),
-    #dependency('gio-2.0'),
-    dependency('gudev-1.0'),
+    dependency('glib-2.0'),
+    dependency('gio-2.0'),
+    #dependency('gudev-1.0'),
 ]
 
 app_src = [
