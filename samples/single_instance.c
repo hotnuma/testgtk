@@ -8,6 +8,9 @@
 #define APPNAME "testgtk"
 #define APPLOCK "/tmp/" APPNAME ".pid"
 
+
+// https://stackoverflow.com/questions/5339200/
+
 bool app_isfirst(const char *lockfile)
 {
     int pid_file = open(lockfile, O_CREAT | O_RDWR, 0666);
