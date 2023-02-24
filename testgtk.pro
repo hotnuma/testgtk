@@ -6,16 +6,13 @@ INCLUDEPATH =
 PKGCONFIG =
 
 PKGCONFIG += gtk+-3.0
-PKGCONFIG += tinyc
-
+#PKGCONFIG += tinyc
 #PKGCONFIG += glib-2.0
-PKGCONFIG += gudev-1.0
+#PKGCONFIG += gudev-1.0
 #PKGCONFIG += dbus-1
 #PKGCONFIG += libxml-2.0
 
 SOURCES = \
-    0Temp.c \
-    main.c \
     samples/gio_app_info.c \
     samples/gmenu.c \
     samples/gtk_appchooser.c \
@@ -29,9 +26,13 @@ SOURCES = \
     samples/sys_gudev.c \
     zetcode/020-simple.c \
     zetcode/021-center.c \
+    zetcode/022-icon.c \
+    zetcode/023-toolltip.c \
+    zetcode/024-mnemonic.c \
     zetcode/030-simplemenu.c \
     zetcode/100-simpletextview.c \
-    zetcode/22-icon.c
+    0Temp.c \
+    main.c \
 
 DISTFILES += \
     install.sh \
