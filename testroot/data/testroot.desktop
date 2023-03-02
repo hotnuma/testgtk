@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=TestRoot
+Icon=application-x-executable
+StartupNotify=false
+Exec=pkexec testroot
+Categories=Utility;
+
