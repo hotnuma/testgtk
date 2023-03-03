@@ -18,6 +18,8 @@ SOURCES = \
     main.c \
 
 DISTFILES = \
+    data/org.hotnuma.testroot.policy \
+    data/testroot-pkexec \
     data/testroot.desktop \
     install.sh \
     License.txt \
