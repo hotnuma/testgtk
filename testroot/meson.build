@@ -40,6 +40,11 @@ install_data(
 )
 
 install_data(
+    'data/testroot-pkexec',
+    install_dir: '/usr/local/bin/',
+)
+
+install_data(
     'data/testroot.desktop',
     install_dir: get_option('datadir') / 'applications',
 )

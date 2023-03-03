@@ -3,6 +3,7 @@ Type=Application
 Name=TestRoot
 Icon=application-x-executable
 StartupNotify=false
-Exec=pkexec testroot
+Exec=testroot-pkexec
 Categories=Utility;
+
 
