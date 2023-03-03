@@ -11,10 +11,23 @@ int main(int argc, char **argv)
 
     GtkWidget *label = gtk_label_new(NULL);
 
-    char *str = g_strdup_printf ("<span font=\"14\" color=\"red\">"
-                                 "<b>User ID : %d</b>"
-                                 "</span>",
-                                 getuid());
+    char *str = NULL;
+
+    int uid = getuid();
+
+    if (uid == 0)
+    {
+        str = g_strdup_printf ("<span font=\"14\" color=\"red\">"
+                               "<b>User is root</b>"
+                               "</span>");
+    }
+    else
+    {
+        str = g_strdup_printf ("<span font=\"14\" color=\"black\">"
+                               "<b>User ID : %d</b>"
+                               "</span>",
+                               uid);
+    }
 
     gtk_label_set_markup(GTK_LABEL(label), str);
     g_free(str);
