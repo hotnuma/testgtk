@@ -1,4 +1,4 @@
 
-Sample Gtk Programs
+Sample GLib/Gtk programs
 
 
