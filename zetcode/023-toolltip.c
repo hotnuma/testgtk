@@ -9,12 +9,14 @@ int main(int argc, char **argv)
     gtk_window_set_default_size(GTK_WINDOW(window), 300, 200);
     gtk_container_set_border_width(GTK_CONTAINER(window), 15);
 
+    GtkWidget *grid = gtk_grid_new();
+    gtk_container_add(GTK_CONTAINER(window), grid);
+
     GtkWidget *button = gtk_button_new_with_label("Button");
     gtk_widget_set_tooltip_text(button, "Button widget");
 
-    GtkWidget *halign = gtk_alignment_new(0, 0, 0, 0);
-    gtk_container_add(GTK_CONTAINER(halign), button);
-    gtk_container_add(GTK_CONTAINER(window), halign);
+    //gtk_widget_set_hexpand (button, TRUE);
+    gtk_grid_attach(GTK_GRID(grid), button, 0, 0, 1, 1);
 
     gtk_widget_show_all(window);
 

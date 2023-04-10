@@ -24,6 +24,7 @@ SOURCES = \
     samples/redirect_widget.c \
     samples/single_instance.c \
     samples/sys_gudev.c \
+    zetcode/010-version.c \
     zetcode/020-simple.c \
     zetcode/021-center.c \
     zetcode/022-icon.c \
