@@ -37,6 +37,16 @@ SOURCES = \
     zetcode/034-popupmenu.c \
     zetcode/035-toolbar.c \
     zetcode/036-undoredo.c \
+    zetcode/040-fixed.c \
+    zetcode/041-vbox.c \
+    zetcode/042-grid.c \
+    zetcode/043-windows.c \
+    zetcode/050-buttonclick.c \
+    zetcode/051-moveevent.c \
+    zetcode/052-entersignal.c \
+    zetcode/053-disconnect.c \
+    zetcode/054-dragdrop.c \
+    zetcode/055-timer.c \
     zetcode/100-simpletextview.c \
     0Temp.c \
     main.c \
