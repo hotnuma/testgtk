@@ -31,6 +31,7 @@ SOURCES = \
     zetcode/023-toolltip.c \
     zetcode/024-mnemonic.c \
     zetcode/030-simplemenu.c \
+    zetcode/031-submenu.c \
     zetcode/100-simpletextview.c \
     0Temp.c \
     main.c \
