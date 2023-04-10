@@ -32,6 +32,11 @@ SOURCES = \
     zetcode/024-mnemonic.c \
     zetcode/030-simplemenu.c \
     zetcode/031-submenu.c \
+    zetcode/032-imagemenu.c \
+    zetcode/033-checkmenuitem.c \
+    zetcode/034-popupmenu.c \
+    zetcode/035-toolbar.c \
+    zetcode/036-undoredo.c \
     zetcode/100-simpletextview.c \
     0Temp.c \
     main.c \
