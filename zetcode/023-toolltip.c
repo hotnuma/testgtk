@@ -15,7 +15,6 @@ int main(int argc, char **argv)
     GtkWidget *button = gtk_button_new_with_label("Button");
     gtk_widget_set_tooltip_text(button, "Button widget");
 
-    //gtk_widget_set_hexpand (button, TRUE);
     gtk_grid_attach(GTK_GRID(grid), button, 0, 0, 1, 1);
 
     gtk_widget_show_all(window);
