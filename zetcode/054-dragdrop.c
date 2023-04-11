@@ -11,11 +11,11 @@ gboolean on_button_press(GtkWidget* widget, GdkEventButton *event,
         if (event->button == 1)
         {
             gtk_window_begin_move_drag(
-                            GTK_WINDOW(gtk_widget_get_toplevel(widget)),
-                            event->button,
-                            event->x_root,
-                            event->y_root,
-                            event->time);
+                GTK_WINDOW(gtk_widget_get_toplevel(widget)),
+                event->button,
+                event->x_root,
+                event->y_root,
+                event->time);
         }
     }
 
