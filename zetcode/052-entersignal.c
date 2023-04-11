@@ -2,34 +2,29 @@
 
 void enter_button(GtkWidget *widget, gpointer data)
 {
+    (void) data;
 
     GdkColor col = {0, 27000, 30000, 35000};
-
     gtk_widget_modify_bg(widget, GTK_STATE_PRELIGHT, &col);
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
-
-    GtkWidget *window;
-    GtkWidget *halign;
-    GtkWidget *btn;
-
     gtk_init(&argc, &argv);
 
-    window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+    GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
     gtk_window_set_default_size(GTK_WINDOW(window), 300, 200);
     gtk_container_set_border_width(GTK_CONTAINER(window), 15);
     gtk_window_set_title(GTK_WINDOW(window), "Enter signal");
 
-    halign = gtk_alignment_new(0, 0, 0, 0);
+    GtkWidget *grid = gtk_grid_new();
+    gtk_container_add(GTK_CONTAINER(window), grid);
 
-    btn = gtk_button_new_with_label("Button");
+    GtkWidget *btn = gtk_button_new_with_label("Button");
     gtk_widget_set_size_request(btn, 70, 30);
 
-    gtk_container_add(GTK_CONTAINER(halign), btn);
-    gtk_container_add(GTK_CONTAINER(window), halign);
+    gtk_grid_attach(GTK_GRID(grid), btn, 0, 0, 1, 1);
 
     g_signal_connect(G_OBJECT(btn), "enter",
                      G_CALLBACK(enter_button), NULL);

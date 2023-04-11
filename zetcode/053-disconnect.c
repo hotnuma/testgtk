@@ -4,13 +4,14 @@ gint handler_id;
 
 void button_clicked(GtkWidget *widget, gpointer data)
 {
+    (void) widget;
+    (void) data;
 
     g_print("clicked\n");
 }
 
 void toogle_signal(GtkWidget *widget, gpointer window)
 {
-
     if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)))
     {
         handler_id = g_signal_connect(G_OBJECT(window), "clicked",
@@ -22,34 +23,27 @@ void toogle_signal(GtkWidget *widget, gpointer window)
     }
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
-
-    GtkWidget *window;
-    GtkWidget *hbox;
-    GtkWidget *vbox;
-    GtkWidget *btn;
-    GtkWidget *cb;
-
     gtk_init(&argc, &argv);
 
-    window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+    GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
     gtk_window_set_default_size(GTK_WINDOW(window), 300, 200);
     gtk_container_set_border_width(GTK_CONTAINER(window), 15);
     gtk_window_set_title(GTK_WINDOW(window), "Disconnect");
 
-    hbox = gtk_hbox_new(FALSE, 15);
+    GtkWidget *hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 15);
 
-    btn = gtk_button_new_with_label("Click");
+    GtkWidget *btn = gtk_button_new_with_label("Click");
     gtk_widget_set_size_request(btn, 70, 30);
     gtk_box_pack_start(GTK_BOX(hbox), btn, FALSE, FALSE, 0);
 
-    cb = gtk_check_button_new_with_label("Connect");
+    GtkWidget *cb = gtk_check_button_new_with_label("Connect");
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cb), TRUE);
     gtk_box_pack_start(GTK_BOX(hbox), cb, FALSE, FALSE, 0);
 
-    vbox = gtk_vbox_new(FALSE, 5);
+    GtkWidget *vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
     gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
     gtk_container_add(GTK_CONTAINER(window), vbox);
 

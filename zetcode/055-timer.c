@@ -7,10 +7,8 @@ gboolean on_expose_event(GtkWidget *widget,
                          GdkEventExpose *event,
                          gpointer data)
 {
-
-    cairo_t *cr;
-
-    cr = gdk_cairo_create(widget->window);
+    cairo_t *cr = gdk_cairo_create(
+                gtk_widget_get_window(widget));
 
     cairo_move_to(cr, 30, 30);
     cairo_set_font_size(cr, 15);
@@ -24,7 +22,7 @@ gboolean on_expose_event(GtkWidget *widget,
 gboolean time_handler(GtkWidget *widget)
 {
 
-    if (widget->window == NULL) return FALSE;
+    if (gtk_widget_get_window(widget) == NULL) return FALSE;
 
     GDateTime *now = g_date_time_new_now_local();
     gchar *my_time = g_date_time_format(now, "%H:%M:%S");
@@ -39,7 +37,7 @@ gboolean time_handler(GtkWidget *widget)
     return TRUE;
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
 
     GtkWidget *window;
@@ -54,6 +52,7 @@ int main(int argc, char *argv[])
 
     g_signal_connect(darea, "expose-event",
                      G_CALLBACK(on_expose_event), NULL);
+
     g_signal_connect(window, "destroy",
                      G_CALLBACK(gtk_main_quit), NULL);
 

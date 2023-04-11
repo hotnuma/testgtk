@@ -13,6 +13,7 @@ PKGCONFIG += gtk+-3.0
 #PKGCONFIG += libxml-2.0
 
 SOURCES = \
+    samples/cairo_draw.c \
     samples/gio_app_info.c \
     samples/gmenu.c \
     samples/gtk_appchooser.c \
@@ -47,14 +48,40 @@ SOURCES = \
     zetcode/053-disconnect.c \
     zetcode/054-dragdrop.c \
     zetcode/055-timer.c \
+    zetcode/060-messagedialogs.c \
+    zetcode/061-aboutdialog.c \
+    zetcode/062-fontdialog.c \
+    zetcode/063-colordialog.c \
+    zetcode/070-button.c \
+    zetcode/071-checkbutton.c \
+    zetcode/072-frames.c \
+    zetcode/073-hscale.c \
+    zetcode/074-label.c \
+    zetcode/075-markup.c \
+    zetcode/080-combobox.c \
+    zetcode/081-separator.c \
+    zetcode/082-entry.c \
+    zetcode/083-image.c \
+    zetcode/084-statusbar.c \
+    zetcode/085-iconview.c \
+    zetcode/090-listview.c \
+    zetcode/091-dynamiclistview.c \
+    zetcode/092-treeview.c \
     zetcode/100-simpletextview.c \
     0Temp.c \
     main.c \
+    zetcode/101-linescols.c \
+    zetcode/102-search.c \
+    zetcode/110-main.c \
+    zetcode/110-mycpu.c
 
 DISTFILES += \
     install.sh \
     License.txt \
     meson.build \
     Readme.md \
+
+HEADERS += \
+    zetcode/110-mycpu.h
 
 
