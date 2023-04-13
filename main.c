@@ -105,14 +105,17 @@ static void toggle_button_toggled(GtkWidget *widget, gpointer data)
 
 static void value_changed(GtkWidget *widget, gpointer data)
 {
-    int value = gtk_scale_button_get_value(GTK_SCALE_BUTTON(widget));
+    (void) data;
 
-    g_print("%i\n", value);
+    double value = gtk_scale_button_get_value(GTK_SCALE_BUTTON(widget));
+
+    g_print("%f\n", value);
 }
 
 int main(int argc, char **argv)
 {
     gtk_init(&argc, &argv);
+    setbuf(stdout, NULL);
 
     GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(window), "Grid Widget");
@@ -242,24 +245,26 @@ int main(int argc, char **argv)
     gtk_grid_attach(GTK_GRID(grid), _spinner, col, row, 1, 1);
     ++col;
 
+    widget = gtk_switch_new();
+    gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
+    gtk_widget_set_halign(widget, GTK_ALIGN_CENTER);
+    gtk_widget_set_valign(widget, GTK_ALIGN_CENTER);
+    g_signal_connect(widget, "notify::active",
+                     G_CALLBACK(switch_toggled), NULL);
+    ++col;
+
     widget = gtk_toggle_button_new_with_label("Toggle");
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), TRUE);
     gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
     g_signal_connect(widget, "toggled",
                      G_CALLBACK(toggle_button_toggled), NULL);
-    ++col;
-
-    widget = gtk_volume_button_new();
-    gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
-    g_signal_connect(widget, "value-changed", G_CALLBACK(value_changed), NULL);
     col = 0;
     ++row;
 
-    widget = gtk_switch_new();
-    gtk_widget_set_halign (widget, GTK_ALIGN_START);
+    widget = gtk_volume_button_new();
+    gtk_scale_button_set_value(GTK_SCALE_BUTTON(widget), 0.81);
     gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
-    g_signal_connect(widget, "notify::active",
-                     G_CALLBACK(switch_toggled), NULL);
+    g_signal_connect(widget, "value-changed", G_CALLBACK(value_changed), NULL);
     ++col;
 
 
