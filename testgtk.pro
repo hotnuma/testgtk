@@ -13,76 +13,13 @@ PKGCONFIG += gtk+-3.0
 #PKGCONFIG += libxml-2.0
 
 SOURCES = \
-    samples/cairo_draw.c \
-    samples/dialog_fontchooser.c \
-    samples/gio_app_info.c \
-    samples/gmenu.c \
-    samples/gtk_appchooser.c \
-    samples/iconview.c \
-    samples/image.c \
-    samples/image_saturate.c \
-    samples/listbox_dnd.c \
-    samples/listview.c \
-    samples/redirect_widget.c \
-    samples/single_instance.c \
-    samples/sys_gudev.c \
-    zetcode/010_version.c \
-    zetcode/020_simple.c \
-    zetcode/021_center.c \
-    zetcode/022_icon.c \
-    zetcode/023_toolltip.c \
-    zetcode/024_mnemonic.c \
-    zetcode/030_simplemenu.c \
-    zetcode/031_submenu.c \
-    zetcode/032_imagemenu.c \
-    zetcode/033_checkmenuitem.c \
-    zetcode/034_popupmenu.c \
-    zetcode/035_toolbar.c \
-    zetcode/036_undoredo.c \
-    zetcode/040_fixed.c \
-    zetcode/041_vbox.c \
-    zetcode/042_grid.c \
-    zetcode/043_windows.c \
-    zetcode/050_buttonclick.c \
-    zetcode/051_moveevent.c \
-    zetcode/052_entersignal.c \
-    zetcode/053_disconnect.c \
-    zetcode/054_dragdrop.c \
-    zetcode/055_timer.c \
-    zetcode/060_messagedialogs.c \
-    zetcode/061_aboutdialog.c \
-    zetcode/062_fontdialog.c \
-    zetcode/063_colordialog.c \
-    zetcode/070_button.c \
-    zetcode/071_checkbutton.c \
-    zetcode/072_frames.c \
-    zetcode/073_hscale.c \
-    zetcode/074_label.c \
-    zetcode/075_markup.c \
-    zetcode/080_combobox.c \
-    zetcode/081_separator.c \
-    zetcode/082_entry.c \
-    zetcode/083_image.c \
-    zetcode/084_statusbar.c \
-    zetcode/085_iconview.c \
-    zetcode/090_listview.c \
-    zetcode/091_dynamiclistview.c \
-    zetcode/092_treeview.c \
-    zetcode/100_simpletextview.c \
     0Temp.c \
     main.c \
-    zetcode/101_linescols.c \
-    zetcode/102_search.c \
-    zetcode/mycpu/main.c \
-    zetcode/mycpu/mycpu.c
 
-DISTFILES += \
+DISTFILES = \
     install.sh \
     License.txt \
     meson.build \
     Readme.md \
-
-HEADERS += \
-    zetcode/mycpu/mycpu.h
 
 
