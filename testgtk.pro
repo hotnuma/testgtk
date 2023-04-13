@@ -28,51 +28,51 @@ SOURCES = \
     samples/sys_gudev.c \
     zetcode/010_version.c \
     zetcode/020_simple.c \
-    zetcode/021-center.c \
-    zetcode/022-icon.c \
-    zetcode/023-toolltip.c \
-    zetcode/024-mnemonic.c \
-    zetcode/030-simplemenu.c \
-    zetcode/031-submenu.c \
-    zetcode/032-imagemenu.c \
-    zetcode/033-checkmenuitem.c \
-    zetcode/034-popupmenu.c \
-    zetcode/035-toolbar.c \
-    zetcode/036-undoredo.c \
-    zetcode/040-fixed.c \
-    zetcode/041-vbox.c \
-    zetcode/042-grid.c \
-    zetcode/043-windows.c \
-    zetcode/050-buttonclick.c \
-    zetcode/051-moveevent.c \
-    zetcode/052-entersignal.c \
-    zetcode/053-disconnect.c \
-    zetcode/054-dragdrop.c \
-    zetcode/055-timer.c \
-    zetcode/060-messagedialogs.c \
-    zetcode/061-aboutdialog.c \
-    zetcode/062-fontdialog.c \
-    zetcode/063-colordialog.c \
-    zetcode/070-button.c \
-    zetcode/071-checkbutton.c \
-    zetcode/072-frames.c \
-    zetcode/073-hscale.c \
-    zetcode/074-label.c \
-    zetcode/075-markup.c \
-    zetcode/080-combobox.c \
-    zetcode/081-separator.c \
-    zetcode/082-entry.c \
-    zetcode/083-image.c \
-    zetcode/084-statusbar.c \
-    zetcode/085-iconview.c \
-    zetcode/090-listview.c \
-    zetcode/091-dynamiclistview.c \
-    zetcode/092-treeview.c \
-    zetcode/100-simpletextview.c \
+    zetcode/021_center.c \
+    zetcode/022_icon.c \
+    zetcode/023_toolltip.c \
+    zetcode/024_mnemonic.c \
+    zetcode/030_simplemenu.c \
+    zetcode/031_submenu.c \
+    zetcode/032_imagemenu.c \
+    zetcode/033_checkmenuitem.c \
+    zetcode/034_popupmenu.c \
+    zetcode/035_toolbar.c \
+    zetcode/036_undoredo.c \
+    zetcode/040_fixed.c \
+    zetcode/041_vbox.c \
+    zetcode/042_grid.c \
+    zetcode/043_windows.c \
+    zetcode/050_buttonclick.c \
+    zetcode/051_moveevent.c \
+    zetcode/052_entersignal.c \
+    zetcode/053_disconnect.c \
+    zetcode/054_dragdrop.c \
+    zetcode/055_timer.c \
+    zetcode/060_messagedialogs.c \
+    zetcode/061_aboutdialog.c \
+    zetcode/062_fontdialog.c \
+    zetcode/063_colordialog.c \
+    zetcode/070_button.c \
+    zetcode/071_checkbutton.c \
+    zetcode/072_frames.c \
+    zetcode/073_hscale.c \
+    zetcode/074_label.c \
+    zetcode/075_markup.c \
+    zetcode/080_combobox.c \
+    zetcode/081_separator.c \
+    zetcode/082_entry.c \
+    zetcode/083_image.c \
+    zetcode/084_statusbar.c \
+    zetcode/085_iconview.c \
+    zetcode/090_listview.c \
+    zetcode/091_dynamiclistview.c \
+    zetcode/092_treeview.c \
+    zetcode/100_simpletextview.c \
     0Temp.c \
     main.c \
-    zetcode/101-linescols.c \
-    zetcode/102-search.c \
+    zetcode/101_linescols.c \
+    zetcode/102_search.c \
     zetcode/mycpu/main.c \
     zetcode/mycpu/mycpu.c
 
