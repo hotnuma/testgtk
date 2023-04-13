@@ -28,7 +28,7 @@ void select_font(GtkWidget *widget, gpointer label)
     gtk_widget_destroy(dialog);
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
 
     GtkWidget *window;

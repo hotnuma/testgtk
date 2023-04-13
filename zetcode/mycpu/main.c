@@ -6,7 +6,7 @@ void cb_changed(GtkRange *range, GtkWidget *cpu)
     my_cpu_set_percent(MY_CPU(cpu), gtk_range_get_value(range));
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
 
     GtkWidget *window;

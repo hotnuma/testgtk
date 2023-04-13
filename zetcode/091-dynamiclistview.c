@@ -84,7 +84,7 @@ void init_list(GtkWidget *list)
     g_object_unref(store);
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
 
     GtkWidget *window;

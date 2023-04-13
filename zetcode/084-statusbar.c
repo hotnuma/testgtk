@@ -12,7 +12,7 @@ void button_pressed(GtkWidget *widget, gpointer window)
     g_free(str);
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
 
     GtkWidget *window;

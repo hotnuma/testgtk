@@ -8,7 +8,7 @@ void combo_selected(GtkWidget *widget, gpointer window)
     g_free(text);
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
 
     GtkWidget *window;

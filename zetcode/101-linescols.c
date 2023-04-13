@@ -29,7 +29,7 @@ void mark_set_callback(GtkTextBuffer *buffer,
     update_statusbar(buffer, GTK_STATUSBAR(data));
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
 
     GtkWidget *window;

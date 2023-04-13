@@ -57,7 +57,7 @@ void on_changed(GtkWidget *widget, gpointer label)
     }
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
 
     GtkWidget *window;

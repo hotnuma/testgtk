@@ -62,7 +62,7 @@ gboolean key_pressed(GtkWidget *window,
     return FALSE;
 }
 
-int main(int argc, gchar *argv[])
+int main(int argc, char **argv)
 {
 
     GtkWidget *window;

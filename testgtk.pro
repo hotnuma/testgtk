@@ -14,6 +14,7 @@ PKGCONFIG += gtk+-3.0
 
 SOURCES = \
     samples/cairo_draw.c \
+    samples/dialog_fontchooser.c \
     samples/gio_app_info.c \
     samples/gmenu.c \
     samples/gtk_appchooser.c \
@@ -25,8 +26,8 @@ SOURCES = \
     samples/redirect_widget.c \
     samples/single_instance.c \
     samples/sys_gudev.c \
-    zetcode/010-version.c \
-    zetcode/020-simple.c \
+    zetcode/010_version.c \
+    zetcode/020_simple.c \
     zetcode/021-center.c \
     zetcode/022-icon.c \
     zetcode/023-toolltip.c \
@@ -72,8 +73,8 @@ SOURCES = \
     main.c \
     zetcode/101-linescols.c \
     zetcode/102-search.c \
-    zetcode/110-main.c \
-    zetcode/110-mycpu.c
+    zetcode/mycpu/main.c \
+    zetcode/mycpu/mycpu.c
 
 DISTFILES += \
     install.sh \
@@ -82,6 +83,6 @@ DISTFILES += \
     Readme.md \
 
 HEADERS += \
-    zetcode/110-mycpu.h
+    zetcode/mycpu/mycpu.h
 
 

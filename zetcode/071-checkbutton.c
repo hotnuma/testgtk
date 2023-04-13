@@ -13,7 +13,7 @@ void toggle_title(GtkWidget *widget, gpointer window)
     }
 }
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
 
     GtkWidget *window;

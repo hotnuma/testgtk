@@ -12,7 +12,7 @@ void value_changed(GtkRange *range, gpointer win)
     g_free(str);
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
 
     GtkWidget *window;

@@ -2,11 +2,14 @@
 
 void show_about(GtkWidget *widget, gpointer data)
 {
+    (void) widget;
+    (void) data;
 
     GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file("battery.png", NULL);
 
     GtkWidget *dialog = gtk_about_dialog_new();
-    gtk_about_dialog_set_name(GTK_ABOUT_DIALOG(dialog), "Battery");
+
+    //gtk_about_dialog_set_name(GTK_ABOUT_DIALOG(dialog), "Battery");
     gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(dialog), "0.9");
     gtk_about_dialog_set_copyright(GTK_ABOUT_DIALOG(dialog),"(c) Jan Bodnar");
     gtk_about_dialog_set_comments(GTK_ABOUT_DIALOG(dialog),
@@ -14,21 +17,20 @@ void show_about(GtkWidget *widget, gpointer data)
     gtk_about_dialog_set_website(GTK_ABOUT_DIALOG(dialog),
                                  "http://www.batteryhq.net");
     gtk_about_dialog_set_logo(GTK_ABOUT_DIALOG(dialog), pixbuf);
-    g_object_unref(pixbuf), pixbuf = NULL;
+
+    if (pixbuf)
+        g_object_unref(pixbuf);
+    pixbuf = NULL;
+
     gtk_dialog_run(GTK_DIALOG (dialog));
     gtk_widget_destroy(dialog);
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
-
-    GtkWidget *window;
-    GtkWidget *about;
-    GdkPixbuf *battery;
-
     gtk_init(&argc, &argv);
 
-    window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+    GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
     gtk_window_set_default_size(GTK_WINDOW(window), 220, 150);
     gtk_window_set_title(GTK_WINDOW(window), "Battery");
@@ -48,4 +50,5 @@ int main(int argc, char *argv[])
 
     return 0;
 }
+
 

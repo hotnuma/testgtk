@@ -48,7 +48,7 @@ GtkTreeModel *init_model(void)
     return GTK_TREE_MODEL(list_store);
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
 
     GtkWidget *window;
