@@ -1,10 +1,27 @@
 #include <gtk/gtk.h>
-//#include <glib-object.h>
+#include <stdbool.h>
+
+GtkWidget *_spinner;
 
 static void button_clicked(GtkWidget *widget, gpointer data)
 {
     (void) widget;
     (void) data;
+
+    static bool spinrunning = false;
+
+    if (spinrunning)
+    {
+        spinrunning = false;
+        gtk_spinner_stop(GTK_SPINNER(_spinner));
+        gtk_button_set_label(GTK_BUTTON(widget), "Start");
+    }
+    else
+    {
+        spinrunning = true;
+        gtk_spinner_start(GTK_SPINNER(_spinner));
+        gtk_button_set_label(GTK_BUTTON(widget), "Stop");
+    }
 
     g_print("Button clicked\n");
 }
@@ -53,8 +70,44 @@ static void file_selected(GtkWidget *widget, gpointer data)
 {
     (void) data;
 
-    g_print("Selected file: %s",
+    g_print("Selected file: %s\n",
             gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(widget)));
+}
+
+static void font_selected(GtkWidget *widget, gpointer data)
+{
+    (void) data;
+
+    g_print("%s\n", gtk_font_button_get_font_name(GTK_FONT_BUTTON(widget)));
+}
+
+static void switch_toggled(GtkWidget *widget)
+{
+    if (gtk_switch_get_active(GTK_SWITCH(widget)))
+        printf("Switch toggled on\n");
+    else
+        printf("Switch toggled off\n");
+}
+
+static void toggle_button_toggled(GtkWidget *widget, gpointer data)
+{
+    (void) data;
+
+    if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)))
+    {
+        g_print("%s toggled on\n", gtk_button_get_label(GTK_BUTTON(widget)));
+    }
+    else
+    {
+        g_print("%s toggled off\n", gtk_button_get_label(GTK_BUTTON(widget)));
+    }
+}
+
+static void value_changed(GtkWidget *widget, gpointer data)
+{
+    int value = gtk_scale_button_get_value(GTK_SCALE_BUTTON(widget));
+
+    g_print("%i\n", value);
 }
 
 int main(int argc, char **argv)
@@ -80,7 +133,7 @@ int main(int argc, char **argv)
     gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
     ++col;
 
-    widget = gtk_button_new_with_label("Button");
+    widget = gtk_button_new_with_label("Start");
     gtk_widget_set_size_request(widget, w, h);
     gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
     g_signal_connect(GTK_BUTTON(widget), "clicked",
@@ -157,7 +210,58 @@ int main(int argc, char **argv)
     gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
     g_signal_connect(widget, "file-set",
                      G_CALLBACK(file_selected), NULL);
+    col = 0;
+    ++row;
+
+    widget = gtk_font_button_new();
+    gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
+    g_signal_connect(widget, "font-set", G_CALLBACK(font_selected), NULL);
     ++col;
+
+    widget = gtk_image_new_from_file("/usr/share/icons/hicolor/24x24/apps/gtk3-widget-factory.png");
+    gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
+    ++col;
+
+    widget = gtk_label_new("Label");
+    gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
+    ++col;
+
+    widget = gtk_link_button_new_with_label("https://developer-old.gnome.org/gtk3/stable/",
+                                                           "LinkButton");
+    gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
+    col = 0;
+    ++row;
+
+    GtkAdjustment *adjustment = gtk_adjustment_new(0, 0, 10, 1, 2, 0);
+    widget = gtk_spin_button_new(GTK_ADJUSTMENT(adjustment), 0, 0);
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), 5);
+    gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
+    ++col;
+
+    _spinner = gtk_spinner_new();
+    gtk_grid_attach(GTK_GRID(grid), _spinner, col, row, 1, 1);
+    ++col;
+
+    widget = gtk_toggle_button_new_with_label("Toggle");
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), TRUE);
+    gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
+    g_signal_connect(widget, "toggled",
+                     G_CALLBACK(toggle_button_toggled), NULL);
+    ++col;
+
+    widget = gtk_volume_button_new();
+    gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
+    g_signal_connect(widget, "value-changed", G_CALLBACK(value_changed), NULL);
+    col = 0;
+    ++row;
+
+    widget = gtk_switch_new();
+    gtk_widget_set_halign (widget, GTK_ALIGN_START);
+    gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
+    g_signal_connect(widget, "notify::active",
+                     G_CALLBACK(switch_toggled), NULL);
+    ++col;
+
 
     g_signal_connect(G_OBJECT(window), "destroy",
                      G_CALLBACK(gtk_main_quit), NULL);
