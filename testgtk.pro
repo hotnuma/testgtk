@@ -15,7 +15,10 @@ PKGCONFIG += gtk+-3.0
 SOURCES = \
     0Temp.c \
     main.c \
-    samples/001_grid.c
+    samples/001_grid.c \
+    samples/01_widgets.c \
+    samples/cairo_draw.c \
+    samples/dialog_fontchooser.c
 
 DISTFILES = \
     install.sh \
