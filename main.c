@@ -78,7 +78,7 @@ static void font_selected(GtkWidget *widget, gpointer data)
 {
     (void) data;
 
-    g_print("%s\n", gtk_font_button_get_font_name(GTK_FONT_BUTTON(widget)));
+    g_print("%s\n", gtk_font_chooser_get_font(GTK_FONT_CHOOSER(widget)));
 }
 
 static void switch_toggled(GtkWidget *widget)
@@ -124,7 +124,12 @@ int main(int argc, char **argv)
     gtk_container_set_border_width(GTK_CONTAINER(window), 6);
 
     GtkWidget *grid = gtk_grid_new();
+    gtk_grid_set_column_spacing(GTK_GRID(grid), 16);
+    gtk_grid_set_row_spacing(GTK_GRID(grid), 16);
+    gtk_grid_set_column_homogeneous(GTK_GRID(grid), true);
+    gtk_grid_set_row_homogeneous(GTK_GRID(grid), true);
     gtk_container_add(GTK_CONTAINER(window), grid);
+
     int row = 0;
     int col = 0;
 
@@ -132,10 +137,21 @@ int main(int argc, char **argv)
     int w = 80;
     int h = 30;
 
-    widget = gtk_app_chooser_button_new("text/plain");
+    // ------------------------------------------------------------------------
+    widget = gtk_label_new("Label");
     gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
     ++col;
 
+    widget = gtk_image_new_from_file("/usr/share/icons/hicolor/24x24/apps/gtk3-widget-factory.png");
+    gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
+    ++col;
+
+    _spinner = gtk_spinner_new();
+    gtk_grid_attach(GTK_GRID(grid), _spinner, col, row, 1, 1);
+    col = 0;
+    ++row;
+
+    // ------------------------------------------------------------------------
     widget = gtk_button_new_with_label("Start");
     gtk_widget_set_size_request(widget, w, h);
     gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
@@ -145,10 +161,38 @@ int main(int argc, char **argv)
 
     widget = gtk_check_button_new_with_label("Check");
     gtk_widget_set_size_request(widget, w, h);
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), TRUE);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), true);
     gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
     g_signal_connect(widget, "toggled",
                      G_CALLBACK(check_button_toggled), NULL);
+    ++col;
+
+    widget = gtk_toggle_button_new_with_label("Toggle");
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), true);
+    gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
+    g_signal_connect(widget, "toggled",
+                     G_CALLBACK(toggle_button_toggled), NULL);
+    ++col;
+
+    widget = gtk_link_button_new_with_label("https://developer-old.gnome.org/gtk3/stable/",
+                                                           "LinkButton");
+    gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
+    col = 0;
+    ++row;
+
+    widget = gtk_switch_new();
+    gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
+    gtk_widget_set_halign(widget, GTK_ALIGN_CENTER);
+    gtk_widget_set_valign(widget, GTK_ALIGN_CENTER);
+    g_signal_connect(widget, "notify::active",
+                     G_CALLBACK(switch_toggled), NULL);
+    ++col;
+
+    widget = gtk_volume_button_new();
+    gtk_scale_button_set_value(GTK_SCALE_BUTTON(widget), 0.81);
+    gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
+    g_signal_connect(widget, "value-changed",
+                     G_CALLBACK(value_changed), NULL);
     ++col;
 
     widget = gtk_color_button_new();
@@ -159,6 +203,23 @@ int main(int argc, char **argv)
     col = 0;
     ++row;
 
+    // ------------------------------------------------------------------------
+    widget = gtk_entry_new();
+    gtk_entry_set_text(GTK_ENTRY(widget), "A Text Entry Widget");
+    gtk_entry_set_placeholder_text(GTK_ENTRY(widget), "Placeholder Text");
+    gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
+    g_signal_connect(GTK_ENTRY(widget), "activate",
+                     G_CALLBACK(entry_activated), NULL);
+    ++col;
+
+    GtkAdjustment *adjustment = gtk_adjustment_new(0, 0, 10, 1, 2, 0);
+    widget = gtk_spin_button_new(GTK_ADJUSTMENT(adjustment), 0, 0);
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), 5);
+    gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
+    col = 0;
+    ++row;
+
+    // ------------------------------------------------------------------------
     GtkListStore *liststore = gtk_list_store_new(1, G_TYPE_STRING);
     GtkTreeIter iter;
 
@@ -182,7 +243,7 @@ int main(int argc, char **argv)
     gtk_combo_box_set_active(GTK_COMBO_BOX(widget), 0);
 
     GtkCellRenderer *cellrenderertext = gtk_cell_renderer_text_new();
-    gtk_cell_layout_pack_start(GTK_CELL_LAYOUT(widget), cellrenderertext, TRUE);
+    gtk_cell_layout_pack_start(GTK_CELL_LAYOUT(widget), cellrenderertext, true);
     gtk_cell_layout_set_attributes(GTK_CELL_LAYOUT(widget), cellrenderertext, "text", 0, NULL);
 
     gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
@@ -200,12 +261,8 @@ int main(int argc, char **argv)
                      G_CALLBACK(combobox_changed), NULL);
     ++col;
 
-    widget = gtk_entry_new();
-    gtk_entry_set_text(GTK_ENTRY(widget), "A Text Entry Widget");
-    gtk_entry_set_placeholder_text(GTK_ENTRY(widget), "Placeholder Text");
+    widget = gtk_app_chooser_button_new("text/plain");
     gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
-    g_signal_connect(GTK_ENTRY(widget), "activate",
-                     G_CALLBACK(entry_activated), NULL);
     ++col;
 
     widget = gtk_file_chooser_button_new("FileChooserButton",
@@ -216,55 +273,10 @@ int main(int argc, char **argv)
     col = 0;
     ++row;
 
+    // ------------------------------------------------------------------------
     widget = gtk_font_button_new();
-    gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
+    gtk_grid_attach(GTK_GRID(grid), widget, col, row, 2, 1);
     g_signal_connect(widget, "font-set", G_CALLBACK(font_selected), NULL);
-    ++col;
-
-    widget = gtk_image_new_from_file("/usr/share/icons/hicolor/24x24/apps/gtk3-widget-factory.png");
-    gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
-    ++col;
-
-    widget = gtk_label_new("Label");
-    gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
-    ++col;
-
-    widget = gtk_link_button_new_with_label("https://developer-old.gnome.org/gtk3/stable/",
-                                                           "LinkButton");
-    gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
-    col = 0;
-    ++row;
-
-    GtkAdjustment *adjustment = gtk_adjustment_new(0, 0, 10, 1, 2, 0);
-    widget = gtk_spin_button_new(GTK_ADJUSTMENT(adjustment), 0, 0);
-    gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), 5);
-    gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
-    ++col;
-
-    _spinner = gtk_spinner_new();
-    gtk_grid_attach(GTK_GRID(grid), _spinner, col, row, 1, 1);
-    ++col;
-
-    widget = gtk_switch_new();
-    gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
-    gtk_widget_set_halign(widget, GTK_ALIGN_CENTER);
-    gtk_widget_set_valign(widget, GTK_ALIGN_CENTER);
-    g_signal_connect(widget, "notify::active",
-                     G_CALLBACK(switch_toggled), NULL);
-    ++col;
-
-    widget = gtk_toggle_button_new_with_label("Toggle");
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(widget), TRUE);
-    gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
-    g_signal_connect(widget, "toggled",
-                     G_CALLBACK(toggle_button_toggled), NULL);
-    col = 0;
-    ++row;
-
-    widget = gtk_volume_button_new();
-    gtk_scale_button_set_value(GTK_SCALE_BUTTON(widget), 0.81);
-    gtk_grid_attach(GTK_GRID(grid), widget, col, row, 1, 1);
-    g_signal_connect(widget, "value-changed", G_CALLBACK(value_changed), NULL);
     ++col;
 
 
