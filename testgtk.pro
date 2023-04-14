@@ -18,7 +18,8 @@ SOURCES = \
     samples/001_grid.c \
     samples/01_widgets.c \
     samples/cairo_draw.c \
-    samples/dialog_fontchooser.c
+    samples/dialog_fontchooser.c \
+    samples/object_set.c
 
 DISTFILES = \
     install.sh \
