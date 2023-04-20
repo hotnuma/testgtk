@@ -3,6 +3,8 @@
 static void font_dialog_ok_callback(GtkFontChooserDialog *chooser_dialog,
                                     gpointer user_data)
 {
+    (void) user_data;
+
     gchar *font_name;
     font_name = gtk_font_chooser_get_font(GTK_FONT_CHOOSER(chooser_dialog));
     g_message("The font you chose is: %s", font_name);

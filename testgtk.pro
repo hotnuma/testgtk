@@ -21,6 +21,7 @@ SOURCES = \
     samples/cairo_draw.c \
     samples/dialog_fontchooser.c \
     samples/object_set.c \
+    samples/object_set_data_full.c \
     zetcode/010_version.c \
     zetcode/020_simple.c \
     zetcode/021_center.c \
