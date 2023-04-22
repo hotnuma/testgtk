@@ -19,10 +19,10 @@ bool etk_window_is_last(GtkWindow *wnd)
     for (GList *i = list; i; i = i->next)
     {
         GtkWidget *current = GTK_WIDGET(i->data);
-
-        if (GTK_IS_WINDOW(current))
+        
+        if (gtk_widget_is_visible(current))
         {
-            g_print("type = %s\n", G_OBJECT_TYPE_NAME(G_OBJECT(current)));
+            //g_print("type = %s\n", G_OBJECT_TYPE_NAME(G_OBJECT(current)));
 
             if (current != widget)
                 return false;
@@ -51,12 +51,16 @@ static void _window_dispose(GObject *object)
 {
     //AppWindow *window = APPWINDOW(object);
 
+    g_print("dispose\n");
+
     G_OBJECT_CLASS(window_parent_class)->dispose(object);
 }
 
 static void _window_finalize(GObject *object)
 {
     //AppWindow *window = APPWINDOW(object);
+
+    g_print("finalize\n");
 
     G_OBJECT_CLASS(window_parent_class)->finalize(object);
 }
@@ -65,8 +69,6 @@ static gboolean _window_on_delete(GtkWidget *widget, GdkEvent *event, gpointer d
 {
     (void) event;
     (void) data;
-
-    g_print("delete-event\n");
 
     Preferences *prefs = get_preferences();
     GtkWindow *window = GTK_WINDOW(widget);

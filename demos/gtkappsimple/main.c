@@ -10,8 +10,8 @@ int main(int argc, char **argv)
     GtkWidget *window = g_object_new(TYPE_APPWINDOW, NULL);
     gtk_widget_show_all(window);
 
-    window = g_object_new(TYPE_APPWINDOW, NULL);
-    gtk_widget_show_all(window);
+    //window = g_object_new(TYPE_APPWINDOW, NULL);
+    //gtk_widget_show_all(window);
 
     gtk_main();
 
