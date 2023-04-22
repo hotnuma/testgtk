@@ -1,36 +1,13 @@
 #include "appwindow.h"
 #include "preferences.h"
+#include <etkwidget.h>
 #include <stdbool.h>
 
 static void _window_dispose(GObject *object);
 static void _window_finalize(GObject *object);
 
 static gboolean _window_on_delete(GtkWidget *widget, GdkEvent *event, gpointer data);
-
 static void _window_create_view(AppWindow *window);
-
-
-bool etk_window_is_last(GtkWindow *wnd)
-{
-    GtkWidget *widget = GTK_WIDGET(wnd);
-
-    GList *list = gtk_window_list_toplevels();
-
-    for (GList *i = list; i; i = i->next)
-    {
-        GtkWidget *current = GTK_WIDGET(i->data);
-        
-        if (gtk_widget_is_visible(current))
-        {
-            //g_print("type = %s\n", G_OBJECT_TYPE_NAME(G_OBJECT(current)));
-
-            if (current != widget)
-                return false;
-        }
-    }
-
-    return true;
-}
 
 
 struct _AppWindow
@@ -51,7 +28,7 @@ static void _window_dispose(GObject *object)
 {
     //AppWindow *window = APPWINDOW(object);
 
-    g_print("dispose\n");
+    //g_print("dispose\n");
 
     G_OBJECT_CLASS(window_parent_class)->dispose(object);
 }
@@ -60,7 +37,7 @@ static void _window_finalize(GObject *object)
 {
     //AppWindow *window = APPWINDOW(object);
 
-    g_print("finalize\n");
+    //g_print("finalize\n");
 
     G_OBJECT_CLASS(window_parent_class)->finalize(object);
 }
