@@ -10,13 +10,11 @@ PKGCONFIG += tinyc
 
 HEADERS = \
     appwindow.h \
-    etkwidget.h
 
 SOURCES = \
     0Temp.c \
     appactions.c \
     appwindow.c \
-    etkwidget.c \
     main.c \
 
 DISTFILES = \

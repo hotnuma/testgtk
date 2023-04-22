@@ -21,7 +21,6 @@ app_deps = [
 app_src = [
     'appactions.c',
     'appwindow.c',
-    'etkwidget.c',
     'main.c',
 ]
 
