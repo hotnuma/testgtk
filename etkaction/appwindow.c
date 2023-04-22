@@ -14,6 +14,7 @@ static void _window_create_toolbar(AppWindow *window);
 
 static void _window_action_test(AppWindow *window, gpointer data);
 
+
 struct _AppWindow
 {
     GtkWindow       __parent__;
@@ -57,20 +58,15 @@ static void window_class_init(AppWindowClass *klass)
     gobject_class->dispose = _window_dispose;
     gobject_class->finalize = _window_finalize;
 
-    etk_actions_translate(_window_actions);
+    //etk_actions_translate(_window_actions);
 }
 
 static void _window_dispose(GObject *object)
 {
     AppWindow *window = APPWINDOW(object);
 
-    if (window->accel_group != NULL)
-    {
-        gtk_accel_group_disconnect(window->accel_group, NULL);
-        gtk_window_remove_accel_group(GTK_WINDOW (window), window->accel_group);
-        g_object_unref(window->accel_group);
-        window->accel_group = NULL;
-    }
+    etk_actions_dispose(GTK_WINDOW(window), window->accel_group);
+    window->accel_group = NULL;
 
     G_OBJECT_CLASS(window_parent_class)->dispose(object);
 }
@@ -89,10 +85,7 @@ static void window_init(AppWindow *window)
     gtk_container_set_border_width(GTK_CONTAINER(window), 0);
     gtk_window_set_default_size(GTK_WINDOW(window), 640, 480);
 
-    window->accel_group = gtk_accel_group_new();
-    etk_actions_map_accels(_window_actions);
-    etk_actions_connect_accels(_window_actions, window->accel_group, window);
-    gtk_window_add_accel_group(GTK_WINDOW(window), window->accel_group);
+    window->accel_group = etk_actions_init(GTK_WINDOW(window), _window_actions);
 
     g_signal_connect(window, "delete-event",
                      G_CALLBACK(_window_on_delete), NULL);
