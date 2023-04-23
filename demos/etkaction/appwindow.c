@@ -1,8 +1,7 @@
-#include "config.h"
 #include "appwindow.h"
 
-#include <stdbool.h>
-#include "etkaction.h"
+#include <etkwidget.h>
+#include <etkaction.h>
 
 static void _window_dispose(GObject *object);
 static void _window_finalize(GObject *object);
@@ -13,7 +12,6 @@ static void _window_create_menubar(AppWindow *window);
 static void _window_create_toolbar(AppWindow *window);
 
 static void _window_action_test(AppWindow *window, gpointer data);
-
 
 struct _AppWindow
 {
@@ -82,8 +80,8 @@ static void window_init(AppWindow *window)
 {
     gtk_window_set_title(GTK_WINDOW(window), "Test Gtk");
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
+    gtk_window_set_default_size(GTK_WINDOW(window), 300, 200);
     gtk_container_set_border_width(GTK_CONTAINER(window), 0);
-    gtk_window_set_default_size(GTK_WINDOW(window), 640, 480);
 
     window->accel_group = etk_actions_init(GTK_WINDOW(window), _window_actions);
 
@@ -95,11 +93,11 @@ static void window_init(AppWindow *window)
 
 static gboolean _window_on_delete(GtkWidget *widget, GdkEvent *event, gpointer data)
 {
-    (void) widget;
     (void) event;
     (void) data;
 
-    gtk_main_quit();
+    if (etk_window_is_last(GTK_WINDOW(widget)))
+        gtk_main_quit();
 
     return false;
 }
@@ -118,18 +116,19 @@ static void _window_create_view(AppWindow *window)
     gtk_container_add(GTK_CONTAINER(scroll), window->grid);
     gtk_widget_show_all(GTK_WIDGET(window));
 
-    // build the application menubar
+    // application menubar
     _window_create_menubar(window);
+    gtk_grid_attach(GTK_GRID(window->grid), window->menubar, 0, 0, 1, 1);
 
+    // application toolbar
     _window_create_toolbar(window);
+    gtk_grid_attach(GTK_GRID(window->grid), window->toolbar, 0, 1, 1, 1);
 
     // menubar visibility
     window->menubar_visible = true;
+
     if (window->menubar_visible == false)
         gtk_widget_hide(window->menubar);
-
-    gtk_grid_attach(GTK_GRID(window->grid), window->menubar, 0, 0, 1, 1);
-    gtk_grid_attach(GTK_GRID(window->grid), window->toolbar, 0, 1, 1, 1);
 }
 
 static void _window_create_menubar(AppWindow *window)
@@ -172,10 +171,9 @@ static void _window_create_toolbar(AppWindow *window)
 static void _window_action_test(AppWindow *window, gpointer data)
 {
     (void) window;
+    (void) data;
 
-    g_print("%s\n", G_OBJECT_TYPE_NAME(data));
-
-    g_print("bla\n");
+    g_print("%s : clicked\n", G_OBJECT_TYPE_NAME(data));
 }
 
 

@@ -1,6 +1,8 @@
 #ifndef APPWINDOW_H
 #define APPWINDOW_H
 
+#include "config.h"
+
 #include <gtk/gtk.h>
 #include <etype.h>
 

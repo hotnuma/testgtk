@@ -2,8 +2,8 @@
 #define CONFIG_H
 
 #include <glib-object.h>
-#include <libmacros.h>
 #include <stdbool.h>
+#include <libmacros.h>
 
 #if defined(GETTEXT_PACKAGE)
 #include <glib/gi18n-lib.h>
