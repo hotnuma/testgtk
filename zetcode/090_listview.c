@@ -1,4 +1,5 @@
 #include <gtk/gtk.h>
+#include <stdbool.h>
 
 enum
 {
@@ -57,30 +58,31 @@ int main(int argc, char **argv)
     gtk_init(&argc, &argv);
 
     GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    GtkWidget *list = gtk_tree_view_new();
-
     gtk_window_set_title(GTK_WINDOW(window), "List view");
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
     gtk_window_set_default_size(GTK_WINDOW(window), 270, 250);
-    gtk_container_set_border_width(GTK_CONTAINER(window), 10);
+    gtk_container_set_border_width(GTK_CONTAINER(window), 0);
 
-    gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(list), FALSE);
+    GtkWidget *list = gtk_tree_view_new();
+    gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(list), false);
+    gtk_widget_set_hexpand(list, true);
+    gtk_widget_set_vexpand(list, true);
 
     GtkWidget *label = gtk_label_new("");
 
-    GtkWidget *vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-    gtk_box_pack_start(GTK_BOX(vbox), list, TRUE, TRUE, 5);
-    gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 5);
-    gtk_container_add(GTK_CONTAINER(window), vbox);
+    //GtkWidget *vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    //gtk_box_pack_start(GTK_BOX(vbox), list, true, true, 5);
+    //gtk_box_pack_start(GTK_BOX(vbox), label, false, false, 5);
+    //gtk_container_add(GTK_CONTAINER(window), vbox);
 
-    //    GtkWidget *grid = gtk_grid_new();
-    //    gtk_container_add(GTK_CONTAINER(window), grid);
-    //    int row = 0;
-        //    gtk_grid_attach(GTK_GRID(grid), list, 0, row, 1, 1);
-        //    ++row;
+    GtkWidget *grid = gtk_grid_new();
+    gtk_container_add(GTK_CONTAINER(window), grid);
+    int row = 0;
 
-        //    gtk_grid_attach(GTK_GRID(grid), label, 0, row, 1, 1);
-        //    ++row;
+    gtk_grid_attach(GTK_GRID(grid), list, 0, row, 1, 1);
+    ++row;
+    gtk_grid_attach(GTK_GRID(grid), label, 0, row, 1, 1);
+    ++row;
 
     list_init(list);
     list_append(list, "Aliens");

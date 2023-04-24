@@ -79,6 +79,7 @@ static void window_init(AppWindow *window)
 {
     Preferences *prefs = prefs_file_read();
 
+    gtk_window_set_title(GTK_WINDOW(window), "Gtk App Simple");
     gtk_window_set_default_size(GTK_WINDOW(window),
                                 prefs->window_width,
                                 prefs->window_height);
@@ -86,7 +87,6 @@ static void window_init(AppWindow *window)
     if (G_UNLIKELY(prefs->window_maximized))
         gtk_window_maximize(GTK_WINDOW(window));
 
-    gtk_window_set_title(GTK_WINDOW(window), "Gtk App Simple");
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
     gtk_container_set_border_width(GTK_CONTAINER(window), 0);
 
