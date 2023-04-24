@@ -65,7 +65,7 @@ void remove_all(GtkWidget *widget, gpointer selection)
     gtk_list_store_clear(store);
 }
 
-void init_list(GtkWidget *list)
+void list_init(GtkWidget *list)
 {
 
     GtkCellRenderer    *renderer;
@@ -142,7 +142,7 @@ int main(int argc, char **argv)
 
     gtk_container_add(GTK_CONTAINER(window), vbox);
 
-    init_list(list);
+    list_init(list);
 
     selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(list));
 

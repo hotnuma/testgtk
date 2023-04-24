@@ -12,11 +12,13 @@ int main(int argc, char **argv)
 
     GtkWidget *grid = gtk_grid_new();
     gtk_container_add(GTK_CONTAINER(window), grid);
+    int row = 0;
 
     GtkWidget *btn = gtk_button_new_with_label("Button");
     gtk_widget_set_size_request(btn, 70, 30);
 
-    gtk_grid_attach(GTK_GRID(grid), btn, 0, 0, 1, 1);
+    gtk_grid_attach(GTK_GRID(grid), btn, 0, row, 1, 1);
+    ++row;
 
     g_signal_connect(G_OBJECT(window), "destroy",
                      G_CALLBACK(gtk_main_quit), NULL);
