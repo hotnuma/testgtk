@@ -4,14 +4,33 @@
 #include "preferences.h"
 #include <gtk/gtk.h>
 
+static void _application_window_take(Application *application, GtkWindow *window);
+
 static void _application_finalize(GObject *object);
 static void _application_startup(GApplication *application);
 static void _application_shutdown(GApplication *application);
 static int _application_command_line(GApplication *application,
                                      GApplicationCommandLine *command_line);
-
 GtkWidget* application_window_open(Application *application);
-static void _application_window_take(Application *application, GtkWindow *window);
+
+void _application_window_take(Application *application, GtkWindow *window)
+{
+    g_return_if_fail(IS_APPLICATION(application));
+    g_return_if_fail(GTK_IS_WINDOW(window));
+
+    // only windows without a parent get a new window group
+    if (gtk_window_get_transient_for(window) == NULL && !gtk_window_has_group(window))
+    {
+        GtkWindowGroup *group = gtk_window_group_new();
+        gtk_window_group_add_window(group, window);
+        g_object_weak_ref(G_OBJECT(window),
+                          (GWeakNotify) (void(*)(void)) g_object_unref,
+                          group);
+    }
+
+    gtk_window_set_application(window, GTK_APPLICATION(application));
+}
+
 
 struct _Application
 {
@@ -73,10 +92,19 @@ static void _application_shutdown(GApplication *gapp)
 }
 
 static int _application_command_line(GApplication *gapp,
-                                     GApplicationCommandLine *command_line)
+                                     GApplicationCommandLine *cmdline)
 {
     (void) gapp;
-    (void) command_line;
+
+    gint argc;
+    gchar **argv = g_application_command_line_get_arguments(cmdline, &argc);
+
+    for (int i = 0; i < argc; ++i)
+    {
+        g_print("arg : %s\n", argv[i]);
+    }
+
+    g_strfreev(argv);
 
     application_window_open(APPLICATION(gapp));
 
@@ -94,24 +122,6 @@ GtkWidget* application_window_open(Application *application)
     gtk_widget_show(window);
 
     return window;
-}
-
-void _application_window_take(Application *application, GtkWindow *window)
-{
-    g_return_if_fail(IS_APPLICATION(application));
-    g_return_if_fail(GTK_IS_WINDOW(window));
-
-    // only windows without a parent get a new window group
-    if (gtk_window_get_transient_for(window) == NULL && !gtk_window_has_group(window))
-    {
-        GtkWindowGroup *group = gtk_window_group_new();
-        gtk_window_group_add_window(group, window);
-        g_object_weak_ref(G_OBJECT(window),
-                          (GWeakNotify) (void(*)(void)) g_object_unref,
-                          group);
-    }
-
-    gtk_window_set_application(window, GTK_APPLICATION(application));
 }
 
 

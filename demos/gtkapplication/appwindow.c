@@ -27,21 +27,6 @@ static void window_class_init(AppWindowClass *klass)
     gtkwidget_class->unrealize = window_unrealize;
 }
 
-static void window_init(AppWindow *window)
-{
-    g_signal_connect(window, "delete-event",
-                     G_CALLBACK(_window_on_delete), NULL);
-
-    Preferences *prefs = get_preferences();
-
-    gtk_window_set_default_size(GTK_WINDOW(window),
-                                prefs->window_width,
-                                prefs->window_height);
-
-    if (G_UNLIKELY(prefs->window_maximized))
-        gtk_window_maximize(GTK_WINDOW(window));
-}
-
 static void window_dispose(GObject *object)
 {
     // do something...
@@ -96,6 +81,22 @@ static gboolean _window_on_delete(GtkWidget *widget, GdkEvent *event, gpointer d
     }
 
     return false;
+}
+
+
+static void window_init(AppWindow *window)
+{
+    g_signal_connect(window, "delete-event",
+                     G_CALLBACK(_window_on_delete), NULL);
+
+    Preferences *prefs = get_preferences();
+
+    gtk_window_set_default_size(GTK_WINDOW(window),
+                                prefs->window_width,
+                                prefs->window_height);
+
+    if (G_UNLIKELY(prefs->window_maximized))
+        gtk_window_maximize(GTK_WINDOW(window));
 }
 
 
