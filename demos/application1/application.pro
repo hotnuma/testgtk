@@ -12,15 +12,14 @@ PKGCONFIG += tinyc
 #PKGCONFIG += libxml-2.0
 
 HEADERS = \
+    application.h \
     appwindow.h \
-    config.h \
-    preferences.h
 
 SOURCES = \
     0Temp.c \
+    application.c \
     appwindow.c \
     main.c \
-    preferences.c
 
 DISTFILES = \
     install.sh \

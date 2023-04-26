@@ -82,35 +82,6 @@ gboolean socket_lock_input_cb(GIOChannel *source, GIOCondition condition, gpoint
     return TRUE;
 }
 
-void path_init()
-{
-    char *display_name = NULL;
-    const char *hostname = g_get_host_name();
-    GdkDisplay *display = gdk_display_get_default();
-    char *p;
-
-    if (display_name == NULL)
-        display_name = g_strdup("NODISPLAY");
-
-    /* these lines are taken from dcopc.c in kdelibs */
-    if ((p = strrchr(display_name, '.')) > strrchr(display_name, ':') && p != NULL)
-        *p = '\0';
-
-    /* remove characters that may not be acceptable in a filename */
-    for (p = display_name; *p; p++)
-    {
-        if (*p == ':' || *p == '/')
-            *p = '_';
-    }
-
-    //if (socket_info.file_name == NULL)
-    //    socket_info.file_name = g_strdup_printf("/tmp/geany_socket_%s_%s",
-    //        hostname, display_name);
-
-    g_free(display_name);
-
-}
-
 static void handle_input_filename(const char *buf)
 {
     char *utf8_filename, *locale_filename;
