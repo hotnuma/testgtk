@@ -17,8 +17,10 @@ int main(int argc, char **argv)
     gtk_container_add(GTK_CONTAINER(window), vbox);
 
     GtkWidget *menubar = gtk_menu_bar_new();
-    GtkWidget *submenu = NULL;
+    gtk_box_pack_start(GTK_BOX(vbox), menubar, FALSE, FALSE, 0);
+
     GtkWidget *menu = NULL;
+    GtkWidget *submenu = NULL;
     GtkWidget *item = NULL;
 
     submenu = gtk_menu_item_new_with_mnemonic("_File");
@@ -34,18 +36,17 @@ int main(int argc, char **argv)
     item = gtk_image_menu_item_new_from_stock("gtk-open", NULL);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), gtk_separator_menu_item_new());
+    item = gtk_separator_menu_item_new();
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 
     item = gtk_image_menu_item_new_from_stock("gtk-quit", accel_group);
     gtk_widget_add_accelerator(item, "activate", accel_group,
                                GDK_KEY_q, GDK_CONTROL_MASK, GTK_ACCEL_VISIBLE);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
     g_signal_connect(G_OBJECT(item), "activate",
                      G_CALLBACK(gtk_main_quit), NULL);
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 
     G_GNUC_END_IGNORE_DEPRECATIONS;
-
-    gtk_box_pack_start(GTK_BOX(vbox), menubar, FALSE, FALSE, 0);
 
     g_signal_connect(G_OBJECT(window), "destroy",
                      G_CALLBACK(gtk_main_quit), NULL);
