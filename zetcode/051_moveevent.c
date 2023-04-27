@@ -24,14 +24,14 @@ int main(int argc, char **argv)
     gtk_window_set_default_size(GTK_WINDOW(window), 300, 200);
 
     gtk_widget_add_events(GTK_WIDGET(window), GDK_CONFIGURE);
+    g_signal_connect(G_OBJECT(window), "configure-event",
+                     G_CALLBACK(configure_callback), NULL);
 
     g_signal_connect(G_OBJECT(window), "destroy",
                      G_CALLBACK(gtk_main_quit), G_OBJECT(window));
 
-    g_signal_connect(G_OBJECT(window), "configure-event",
-                     G_CALLBACK(configure_callback), NULL);
+    gtk_widget_show_all(window);
 
-    gtk_widget_show(window);
     gtk_main();
 
     return 0;

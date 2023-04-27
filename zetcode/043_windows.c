@@ -5,16 +5,16 @@ int main(int argc, char **argv)
     gtk_init(&argc, &argv);
 
     GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
-    gtk_widget_set_size_request (window, 300, 250);
-
     gtk_window_set_title(GTK_WINDOW(window), "Windows");
+    gtk_widget_set_size_request (window, 300, 200);
+    gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
 
     gtk_container_set_border_width(GTK_CONTAINER(window), 15);
 
     GtkWidget *table = gtk_table_new(6, 4, FALSE);
     gtk_table_set_col_spacings(GTK_TABLE(table), 3);
     gtk_table_set_row_spacing(GTK_TABLE(table), 0, 3);
+    gtk_container_add(GTK_CONTAINER(window), table);
 
     GtkWidget *title = gtk_label_new("Windows");
     GtkWidget *halign = gtk_alignment_new(0, 0, 0, 0);
@@ -54,8 +54,6 @@ int main(int argc, char **argv)
     gtk_widget_set_size_request(okBtn, 70, 30);
     gtk_table_attach(GTK_TABLE(table), okBtn, 3, 4, 4, 5,
                      GTK_FILL, GTK_FILL, 0, 0);
-
-    gtk_container_add(GTK_CONTAINER(window), table);
 
     g_signal_connect(G_OBJECT(window), "destroy",
                      G_CALLBACK(gtk_main_quit), G_OBJECT(window));

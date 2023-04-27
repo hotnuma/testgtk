@@ -12,18 +12,19 @@ int main(int argc, char **argv)
     GtkWidget *fixed = gtk_fixed_new();
     gtk_container_add(GTK_CONTAINER(window), fixed);
 
+    GtkWidget *item = NULL;
 
-    GtkWidget *btn1 = gtk_button_new_with_label("Button");
-    gtk_fixed_put(GTK_FIXED(fixed), btn1, 150, 50);
-    gtk_widget_set_size_request(btn1, 80, 30);
+    item = gtk_button_new_with_label("Button");
+    gtk_fixed_put(GTK_FIXED(fixed), item, 150, 50);
+    gtk_widget_set_size_request(item, 80, 30);
 
-    GtkWidget *btn2 = gtk_button_new_with_label("Button");
-    gtk_fixed_put(GTK_FIXED(fixed), btn2, 15, 15);
-    gtk_widget_set_size_request(btn2, 80, 30);
+    item = gtk_button_new_with_label("Button");
+    gtk_fixed_put(GTK_FIXED(fixed), item, 15, 15);
+    gtk_widget_set_size_request(item, 80, 30);
 
-    GtkWidget *btn3 = gtk_button_new_with_label("Button");
-    gtk_fixed_put(GTK_FIXED(fixed), btn3, 100, 100);
-    gtk_widget_set_size_request(btn3, 80, 30);
+    item = gtk_button_new_with_label("Button");
+    gtk_fixed_put(GTK_FIXED(fixed), item, 100, 100);
+    gtk_widget_set_size_request(item, 80, 30);
 
     g_signal_connect(G_OBJECT(window), "destroy",
                      G_CALLBACK(gtk_main_quit), NULL);
