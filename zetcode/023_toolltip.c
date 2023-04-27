@@ -17,10 +17,10 @@ int main(int argc, char **argv)
 
     gtk_grid_attach(GTK_GRID(grid), button, 0, 0, 1, 1);
 
-    gtk_widget_show_all(window);
-
     g_signal_connect(G_OBJECT(window), "destroy",
                      G_CALLBACK(gtk_main_quit), NULL);
+
+    gtk_widget_show_all(window);
 
     gtk_main();
 
