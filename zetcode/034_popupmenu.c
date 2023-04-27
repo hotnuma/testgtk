@@ -10,13 +10,8 @@ int show_popup(GtkWidget *widget, GdkEvent *event)
 
         if (bevent->button == RIGHT_CLICK)
         {
-            gtk_menu_popup(GTK_MENU(widget),
-                           NULL,
-                           NULL,
-                           NULL,
-                           NULL,
-                           bevent->button,
-                           bevent->time);
+            gtk_menu_popup_at_pointer(GTK_MENU(widget), event);
+            gtk_menu_reposition(GTK_MENU(widget));
         }
 
         return TRUE;
@@ -53,11 +48,11 @@ int main(int argc, char **argv)
     g_signal_connect(G_OBJECT(item), "activate",
                      G_CALLBACK(gtk_main_quit), NULL);
 
-    g_signal_connect(G_OBJECT(window), "destroy",
-                     G_CALLBACK(gtk_main_quit), NULL);
-
     g_signal_connect_swapped(G_OBJECT(ebox), "button-press-event",
                              G_CALLBACK(show_popup), menu);
+
+    g_signal_connect(G_OBJECT(window), "destroy",
+                     G_CALLBACK(gtk_main_quit), NULL);
 
     gtk_widget_show_all(window);
 
