@@ -15,11 +15,9 @@ PKGCONFIG += gtk+-3.0
 SOURCES = \
     0Temp.c \
     main.c \
-    samples/001_grid.c \
     samples/01_widgets.c \
     samples/02_toolbar.c \
     samples/cairo_draw.c \
-    samples/dialog_fontchooser.c \
     samples/object_set.c \
     samples/object_set_data_full.c \
     zetcode/010_version.c \

@@ -1,15 +1,16 @@
 #include <gtk/gtk.h>
 
-void show_about(GtkWidget *widget, gpointer data)
+void on_button_press(GtkWidget *widget, GdkEvent *event, gpointer user_data)
 {
     (void) widget;
-    (void) data;
+    (void) event;
+    (void) user_data;
 
     GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file("battery.png", NULL);
 
     GtkWidget *dialog = gtk_about_dialog_new();
 
-    //gtk_about_dialog_set_name(GTK_ABOUT_DIALOG(dialog), "Battery");
+    gtk_about_dialog_set_program_name(GTK_ABOUT_DIALOG(dialog), "Battery");
     gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(dialog), "0.9");
     gtk_about_dialog_set_copyright(GTK_ABOUT_DIALOG(dialog),"(c) Jan Bodnar");
     gtk_about_dialog_set_comments(GTK_ABOUT_DIALOG(dialog),
@@ -20,9 +21,10 @@ void show_about(GtkWidget *widget, gpointer data)
 
     if (pixbuf)
         g_object_unref(pixbuf);
+
     pixbuf = NULL;
 
-    gtk_dialog_run(GTK_DIALOG (dialog));
+    gtk_dialog_run(GTK_DIALOG(dialog));
     gtk_widget_destroy(dialog);
 }
 
@@ -39,7 +41,7 @@ int main(int argc, char **argv)
     gtk_widget_add_events(window, GDK_BUTTON_PRESS_MASK);
 
     g_signal_connect(G_OBJECT(window), "button-press-event",
-                     G_CALLBACK(show_about), (gpointer) window);
+                     G_CALLBACK(on_button_press), (gpointer) window);
 
     g_signal_connect(G_OBJECT(window), "destroy",
                      G_CALLBACK(gtk_main_quit), G_OBJECT(window));

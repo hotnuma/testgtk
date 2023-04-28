@@ -28,10 +28,10 @@ int main(int argc, char **argv)
     gtk_init(&argc, &argv);
 
     GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
-    gtk_window_set_default_size(GTK_WINDOW(window), 300, 200);
-    gtk_container_set_border_width(GTK_CONTAINER(window), 15);
     gtk_window_set_title(GTK_WINDOW(window), "Disconnect");
+    gtk_window_set_default_size(GTK_WINDOW(window), 300, 200);
+    gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
+    gtk_container_set_border_width(GTK_CONTAINER(window), 15);
 
     GtkWidget *hbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 15);
 

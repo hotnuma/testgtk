@@ -7,7 +7,6 @@ gboolean on_button_press(GtkWidget* widget, GdkEventButton *event,
 
     if (event->type == GDK_BUTTON_PRESS)
     {
-
         if (event->button == 1)
         {
             gtk_window_begin_move_drag(
@@ -27,20 +26,19 @@ int main(int argc, char **argv)
     gtk_init(&argc, &argv);
 
     GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
-    gtk_window_set_default_size(GTK_WINDOW(window), 250, 200);
     gtk_window_set_title(GTK_WINDOW(window), "Drag & drop");
-
+    gtk_window_set_default_size(GTK_WINDOW(window), 300, 200);
+    gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
     gtk_window_set_decorated(GTK_WINDOW(window), FALSE);
-    gtk_widget_add_events(window, GDK_BUTTON_PRESS_MASK);
 
+    gtk_widget_add_events(window, GDK_BUTTON_PRESS_MASK);
     g_signal_connect(G_OBJECT(window), "button-press-event",
                      G_CALLBACK(on_button_press), NULL);
 
     g_signal_connect(G_OBJECT(window), "destroy",
                      G_CALLBACK(gtk_main_quit), G_OBJECT(window));
 
-    gtk_widget_show(window);
+    gtk_widget_show_all(window);
 
     gtk_main();
 

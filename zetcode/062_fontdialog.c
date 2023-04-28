@@ -4,20 +4,20 @@ void select_font(GtkWidget *widget, gpointer label)
 {
     (void) widget;
 
-    GtkWidget *dialog = gtk_font_selection_dialog_new("Select Font");
-
+    GtkWidget *dialog = gtk_font_chooser_dialog_new("Choose a font", NULL);
     GtkResponseType result = gtk_dialog_run(GTK_DIALOG(dialog));
 
     if (result == GTK_RESPONSE_OK || result == GTK_RESPONSE_APPLY)
     {
-
-        gchar *fontname = gtk_font_selection_dialog_get_font_name(
-            GTK_FONT_SELECTION_DIALOG(dialog));
+        gchar *fontname = gtk_font_chooser_get_font(GTK_FONT_CHOOSER(dialog));
 
         PangoFontDescription *font_desc;
         font_desc = pango_font_description_from_string(fontname);
 
+        G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
         gtk_widget_modify_font(GTK_WIDGET(label), font_desc);
+        //gtk_widget_override_font(GTK_WIDGET(label), font_desc);
+        G_GNUC_END_IGNORE_DEPRECATIONS;
 
         g_free(fontname);
     }
@@ -42,16 +42,17 @@ int main(int argc, char **argv)
 
     gtk_container_set_border_width(GTK_CONTAINER(toolbar), 2);
 
+    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
     GtkToolItem *font;
     font = gtk_tool_button_new_from_stock(GTK_STOCK_SELECT_FONT);
     gtk_toolbar_insert(GTK_TOOLBAR(toolbar), font, -1);
+    G_GNUC_END_IGNORE_DEPRECATIONS;
 
     gtk_box_pack_start(GTK_BOX(vbox), toolbar, FALSE, FALSE, 5);
 
     GtkWidget *label = gtk_label_new("ZetCode");
     gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_CENTER);
     gtk_box_pack_start(GTK_BOX(vbox), label, TRUE, FALSE, 5);
-
     g_signal_connect(G_OBJECT(font), "clicked",
                      G_CALLBACK(select_font), label);
 

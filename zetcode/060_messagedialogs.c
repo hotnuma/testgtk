@@ -69,43 +69,40 @@ int main(int argc, char **argv)
     gtk_init(&argc, &argv);
 
     GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
-    gtk_window_set_default_size(GTK_WINDOW(window), 220, 150);
     gtk_window_set_title(GTK_WINDOW(window), "Message dialogs");
+    gtk_window_set_default_size(GTK_WINDOW(window), 300, 200);
+    gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
+    gtk_container_set_border_width(GTK_CONTAINER(window), 4);
 
-    GtkWidget *table = gtk_table_new(2, 2, TRUE);
-    gtk_table_set_row_spacings(GTK_TABLE(table), 2);
-    gtk_table_set_col_spacings(GTK_TABLE(table), 2);
+    GtkWidget *grid = gtk_grid_new();
+    gtk_grid_set_column_spacing(GTK_GRID(grid), 4);
+    gtk_grid_set_row_spacing(GTK_GRID(grid), 4);
+    gtk_container_add(GTK_CONTAINER(window), grid);
+    int row = 0;
 
-    GtkWidget *info = gtk_button_new_with_label("Info");
-    GtkWidget *warn = gtk_button_new_with_label("Warning");
-    GtkWidget *que = gtk_button_new_with_label("Question");
-    GtkWidget *err = gtk_button_new_with_label("Error");
+    GtkWidget *item = NULL;
 
-    gtk_table_attach(GTK_TABLE(table), info, 0, 1, 0, 1,
-                     GTK_FILL, GTK_FILL, 3, 3);
-    gtk_table_attach(GTK_TABLE(table), warn, 1, 2, 0, 1,
-                     GTK_FILL, GTK_FILL, 3, 3);
-    gtk_table_attach(GTK_TABLE(table), que, 0, 1, 1, 2,
-                     GTK_FILL, GTK_FILL, 3, 3);
-    gtk_table_attach(GTK_TABLE(table), err, 1, 2, 1, 2,
-                     GTK_FILL, GTK_FILL, 3, 3);
-
-    gtk_container_add(GTK_CONTAINER(window), table);
-
-    gtk_container_set_border_width(GTK_CONTAINER(window), 15);
-
-    g_signal_connect(G_OBJECT(info), "clicked",
+    item = gtk_button_new_with_label("Info");
+    gtk_grid_attach(GTK_GRID(grid), item, 0, row, 1, 1);
+    g_signal_connect(G_OBJECT(item), "clicked",
                      G_CALLBACK(show_info), (gpointer) window);
 
-    g_signal_connect(G_OBJECT(warn), "clicked",
+    item = gtk_button_new_with_label("Warning");
+    gtk_grid_attach(GTK_GRID(grid), item, 1, row, 1, 1);
+    g_signal_connect(G_OBJECT(item), "clicked",
                      G_CALLBACK(show_warning), (gpointer) window);
+    ++row;
 
-    g_signal_connect(G_OBJECT(que), "clicked",
+    item = gtk_button_new_with_label("Question");
+    gtk_grid_attach(GTK_GRID(grid), item, 0, row, 1, 1);
+    g_signal_connect(G_OBJECT(item), "clicked",
                      G_CALLBACK(show_question), (gpointer) window);
 
-    g_signal_connect(G_OBJECT(err), "clicked",
+    item = gtk_button_new_with_label("Error");
+    gtk_grid_attach(GTK_GRID(grid), item, 1, row, 1, 1);
+    g_signal_connect(G_OBJECT(item), "clicked",
                      G_CALLBACK(show_error), (gpointer) window);
+    ++row;
 
     g_signal_connect(G_OBJECT(window), "destroy",
                      G_CALLBACK(gtk_main_quit), G_OBJECT(window));
