@@ -4,21 +4,24 @@
 gboolean key_pressed(GtkWidget *window,
                      GdkEventKey* event, GtkTextBuffer *buffer)
 {
+    (void) window;
 
-    GtkTextIter start_sel, end_sel;
-    GtkTextIter start_find, end_find;
-    GtkTextIter start_match, end_match;
+    GtkTextIter start_sel;
+    GtkTextIter end_sel;
+    GtkTextIter start_find;
+    GtkTextIter end_find;
+    GtkTextIter start_match;
+    GtkTextIter end_match;
     gboolean selected;
     gchar *text;
 
-    if ((event->type == GDK_KEY_PRESS) &&
-            (event->state & GDK_CONTROL_MASK))
+    if ((event->type == GDK_KEY_PRESS) && (event->state & GDK_CONTROL_MASK))
     {
 
         switch (event->keyval)
         {
 
-        case GDK_m :
+        case GDK_KEY_m :
             selected = gtk_text_buffer_get_selection_bounds(buffer,
                        &start_sel, &end_sel);
             if (selected)
@@ -49,7 +52,7 @@ gboolean key_pressed(GtkWidget *window,
 
             break;
 
-        case GDK_r:
+        case GDK_KEY_r:
             gtk_text_buffer_get_start_iter(buffer, &start_find);
             gtk_text_buffer_get_end_iter(buffer, &end_find);
 
@@ -64,38 +67,31 @@ gboolean key_pressed(GtkWidget *window,
 
 int main(int argc, char **argv)
 {
-
-    GtkWidget *window;
-    GtkWidget *view;
-    GtkWidget *vbox;
-
-    GtkTextBuffer *buffer;
-    GtkTextIter start, end;
-    GtkTextIter iter;
-
     gtk_init(&argc, &argv);
 
-    window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+    GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
     gtk_window_set_default_size(GTK_WINDOW(window), 350, 300);
     gtk_window_set_title(GTK_WINDOW(window), "Search & highlight");
-    GTK_WINDOW(window)->allow_shrink = TRUE;
 
-    vbox = gtk_vbox_new(FALSE, 0);
-    view = gtk_text_view_new();
+    //GTK_WINDOW(window)->allow_shrink = TRUE;
+
+    GtkWidget *vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    gtk_container_add(GTK_CONTAINER(window), vbox);
+
+    GtkWidget *view = gtk_text_view_new();
     gtk_widget_add_events(view, GDK_BUTTON_PRESS_MASK);
     gtk_box_pack_start(GTK_BOX(vbox), view, TRUE, TRUE, 0);
 
-    buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(view));
+    GtkTextBuffer *buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(view));
     gtk_text_buffer_create_tag(buffer, "gray_bg",
                                "background", "lightgray", NULL);
-    gtk_container_add(GTK_CONTAINER(window), vbox);
-
-    g_signal_connect(G_OBJECT(window), "destroy",
-                     G_CALLBACK(gtk_main_quit), NULL);
 
     g_signal_connect(G_OBJECT(window), "key-press-event",
                      G_CALLBACK(key_pressed), buffer);
+
+    g_signal_connect(G_OBJECT(window), "destroy",
+                     G_CALLBACK(gtk_main_quit), NULL);
 
     gtk_widget_show_all(window);
 
