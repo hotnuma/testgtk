@@ -70,11 +70,6 @@ int main(int argc, char **argv)
 
     GtkWidget *label = gtk_label_new("");
 
-    //GtkWidget *vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-    //gtk_box_pack_start(GTK_BOX(vbox), list, true, true, 5);
-    //gtk_box_pack_start(GTK_BOX(vbox), label, false, false, 5);
-    //gtk_container_add(GTK_CONTAINER(window), vbox);
-
     GtkWidget *grid = gtk_grid_new();
     gtk_container_add(GTK_CONTAINER(window), grid);
     int row = 0;
