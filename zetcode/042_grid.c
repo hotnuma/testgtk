@@ -11,6 +11,8 @@ int main(int argc, char **argv)
     gtk_container_set_border_width(GTK_CONTAINER(window), 15);
 
     GtkWidget *grid = gtk_grid_new();
+    gtk_grid_set_column_spacing(GTK_GRID(grid), 2);
+    gtk_grid_set_row_spacing(GTK_GRID(grid), 2);
     gtk_container_add(GTK_CONTAINER(window), grid);
     int row = 0;
 
