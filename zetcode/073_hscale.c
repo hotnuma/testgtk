@@ -1,5 +1,3 @@
-hscale.c
-
 #include <gtk/gtk.h>
 
 void value_changed(GtkRange *range, gpointer win)
