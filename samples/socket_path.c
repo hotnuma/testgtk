@@ -1,6 +1,7 @@
 #include <gtk/gtk.h>
 
-char* socket_pathinit(const char *dir, const char *appname)
+#if 0
+char* socket_geany_pathinit(const char *dir, const char *appname)
 {
     //GdkDisplay *display = gdk_display_get_default();
 
@@ -35,10 +36,23 @@ char* socket_pathinit(const char *dir, const char *appname)
 
     return filepath;
 }
+#endif
+
+char* socket_path_new(const char *appname)
+{
+    int uid = getuid();
+
+    char *filepath = g_strdup_printf(
+                            "/tmp/%s_socket_%d",
+                            appname,
+                            uid);
+
+    return filepath;
+}
 
 int main()
 {
-    printf("path = %s\n", socket_pathinit("/tmp", "bla"));
+    printf("path = %s\n", socket_path_new("app"));
 
     return 0;
 }
