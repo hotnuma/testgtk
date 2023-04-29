@@ -30,7 +30,7 @@ int onSocketInput(GIOChannel *source, GIOCondition condition, gpointer data)
         int remain;
         char *ptr = cstr_reserve_ptr(buffer, &remain);
 
-        int num = socket_fd_gets(sock, ptr, remain);
+        int num = socket_fd_gets(sock, ptr, remain + 1);
 
         if (num < 0)
             break;
@@ -38,11 +38,14 @@ int onSocketInput(GIOChannel *source, GIOCondition condition, gpointer data)
         total += num;
     }
 
+    socket_fd_close(sock);
+
     cstr_terminate(buffer, total);
 
-    print("Received : %s", c_str(buffer));
+    if (cstr_last(buffer) == '\n')
+        cstr_chop(buffer, 1);
 
-    socket_fd_close(sock);
+    print("Received : %s", c_str(buffer));
 
     return true;
 }
