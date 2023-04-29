@@ -4,6 +4,21 @@
 #include <string.h>
 #include <print.h>
 
+#include <unistd.h>
+#include <glib.h>
+
+char* socket_path_new(const char *appname)
+{
+    int uid = getuid();
+
+    char *filepath = g_strdup_printf(
+                            "/tmp/%s_socket_%d",
+                            appname,
+                            uid);
+
+    return filepath;
+}
+
 void clist_split(CList *cslist, const char *str, const char *sep,
                  bool keepEmptyParts, bool sensitive)
 {

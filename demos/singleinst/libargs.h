@@ -4,6 +4,8 @@
 #include <clist.h>
 #include <stdbool.h>
 
+char* socket_path_new(const char *appname);
+
 void clist_split(CList *cslist, const char *str, const char *sep,
                  bool keepEmptyParts, bool sensitive);
 

@@ -22,18 +22,25 @@ int onSocketInput(GIOChannel *source, GIOCondition condition, gpointer data)
     int fd = g_io_channel_unix_get_fd(source);
     int sock = accept(fd, (struct sockaddr*) &caddr, &caddr_len);
 
-    char buf[BUFFER_LENGTH];
-    char *cmdargs = NULL;
+    CString *buffer = cstr_new_size(2048);
+    int total = 0;
 
-    // first get the command.
-    while (socket_fd_gets(sock, buf, sizeof(buf)) != -1)
+    while (1)
     {
-        cmdargs = strdup(buf);
+        int remain;
+        char *ptr = cstr_reserve_ptr(buffer, &remain);
 
-        print("Received : %s", g_strstrip(cmdargs));
+        int num = socket_fd_gets(sock, ptr, remain);
 
-        free(cmdargs);
+        if (num < 0)
+            break;
+
+        total += num;
     }
+
+    cstr_terminate(buffer, total);
+
+    print("Received : %s", c_str(buffer));
 
     socket_fd_close(sock);
 
@@ -45,8 +52,10 @@ int main(int argc, char **argv)
 {
     gtk_init(&argc, &argv);
 
+    c_autofree char *sockpath = socket_path_new("singleinst");
+
     CSingleInstanceAuto *inst = csingleinst_new();
-    csingleinst_open(inst, "/tmp/my_socket",
+    csingleinst_open(inst, sockpath,
                      (GIOFunc) onSocketInput, NULL);
 
     if (!csingleinst_isfirst(inst))
