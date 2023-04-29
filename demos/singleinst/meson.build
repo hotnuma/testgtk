@@ -23,6 +23,7 @@ app_deps = [
 app_src = [
     'appactions.c',
     'appwindow.c',
+    'libargs.c',
     'main.c',
 ]
 

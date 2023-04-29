@@ -1,5 +1,26 @@
 #if 0
 
+int main(int argc, char **argv)
+{
+    char *str = args_to_str(argc, argv);
+
+    print(str);
+
+    CListAuto *list = str_to_args(str);
+
+    int argc_copy = clist_size(list);
+    char **argv_copy = (char**) clist_data(list);
+
+    for (int i = 0; i < argc_copy; ++i)
+    {
+        print("arg : %s", argv_copy[i]);
+    }
+
+    free(str);
+
+    return EXIT_SUCCESS;
+}
+
 G_GNUC_UNUSED gushort socket_port
 
 #include <sys/socket.h>

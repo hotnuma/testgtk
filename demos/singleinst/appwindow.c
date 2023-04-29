@@ -72,46 +72,4 @@ static void _window_create_view(AppWindow *window)
                                         GTK_SHADOW_IN);
 }
 
-#if 0
-
-#include <libsocket.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-
-void MainWindow::_createWindow()
-{
-    _wnd = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_title(GTK_WINDOW(_wnd), "App Title");
-    gtk_window_set_default_size(GTK_WINDOW(_wnd), 400, 300);
-    gtk_window_set_position(GTK_WINDOW(_wnd), GTK_WIN_POS_CENTER);
-    setWindowObject(_wnd, this);
-
-    _grid = gtk_grid_new();
-    gtk_container_add(GTK_CONTAINER(_wnd), _grid);
-
-    _createMenu();
-
-    GtkWidget *scrolled_w = gtk_scrolled_window_new(NULL, NULL);
-    gtk_widget_set_hexpand(scrolled_w, true);
-    gtk_widget_set_vexpand(scrolled_w, true);
-    gtk_grid_attach(GTK_GRID(_grid), scrolled_w, 0, _gridrow, 1, 1);
-    ++_gridrow;
-
-    GtkWidget *view = gtk_text_view_new();
-    gtk_container_add(GTK_CONTAINER(scrolled_w), view);
-
-    //GtkTextBuffer *buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(view));
-    //GtkTextIter iter;
-    //gtk_text_buffer_get_iter_at_offset(buffer, &iter, 0);
-    //gtk_text_buffer_insert(buffer, &iter, "sample text\n", -1);
-
-    _statusbar = gtk_statusbar_new();
-    gtk_grid_attach(GTK_GRID(_grid), _statusbar, 0, _gridrow, 1, 1);
-    ++_gridrow;
-
-    g_signal_connect(_wnd, "destroy", G_CALLBACK(_onDestroyCB), this);
-}
-
-#endif
-
 

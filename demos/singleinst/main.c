@@ -1,11 +1,12 @@
 #include "appwindow.h"
 
+#include "libargs.h"
+
 #include <csingleinstance.h>
 #include <libapp.h>
 
 #include <netinet/in.h>
 #include <sys/types.h>
-
 #include <print.h>
 
 #define BUFFER_LENGTH 4096
@@ -15,8 +16,6 @@ int onSocketInput(GIOChannel *source, GIOCondition condition, gpointer data)
     (void) condition;
     (void) data;
 
-    print("input %d", gettid());
-
     struct sockaddr_in caddr;
     socklen_t caddr_len = sizeof(caddr);
 
@@ -24,14 +23,16 @@ int onSocketInput(GIOChannel *source, GIOCondition condition, gpointer data)
     int sock = accept(fd, (struct sockaddr*) &caddr, &caddr_len);
 
     char buf[BUFFER_LENGTH];
-    char *command = NULL;
+    char *cmdargs = NULL;
 
     // first get the command.
     while (socket_fd_gets(sock, buf, sizeof(buf)) != -1)
     {
-        command = strdup(buf);
-        print("Received : %s", g_strstrip(command));
-        free(command);
+        cmdargs = strdup(buf);
+
+        print("Received : %s", g_strstrip(cmdargs));
+
+        free(cmdargs);
     }
 
     socket_fd_close(sock);
@@ -42,8 +43,6 @@ int onSocketInput(GIOChannel *source, GIOCondition condition, gpointer data)
 int main(int argc, char **argv)
 
 {
-    print("main %d", gettid());
-
     gtk_init(&argc, &argv);
 
     CSingleInstanceAuto *inst = csingleinst_new();
@@ -52,10 +51,14 @@ int main(int argc, char **argv)
 
     if (!csingleinst_isfirst(inst))
     {
-        socket_fd_write_all(csingleinst_sock(inst),
-                            "bla ble blie\n", -1);
+        char *cmdargs = args_to_str(argc, argv);
 
-        //socket_fd_close(inst.sock());
+        socket_fd_write_all(csingleinst_sock(inst),
+                            cmdargs, -1);
+
+        socket_fd_close(csingleinst_sock(inst));
+
+        free(cmdargs);
 
         return 0;
     }
