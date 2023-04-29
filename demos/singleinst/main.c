@@ -4,14 +4,12 @@
 
 #include <csingleinstance.h>
 #include <libapp.h>
-
 #include <netinet/in.h>
 #include <sys/types.h>
+
 #include <print.h>
 
-#define BUFFER_LENGTH 4096
-
-int onSocketInput(GIOChannel *source, GIOCondition condition, gpointer data)
+int on_socket_input(GIOChannel *source, GIOCondition condition, gpointer data)
 {
     (void) condition;
     (void) data;
@@ -47,6 +45,16 @@ int onSocketInput(GIOChannel *source, GIOCondition condition, gpointer data)
 
     print("Received : %s", c_str(buffer));
 
+    CListAuto *list = str_to_args(c_str(buffer));
+
+    int argc = clist_size(list);
+    char **argv = (char**) clist_data(list);
+
+    for (int i = 0; i < argc; ++i)
+    {
+        print("arg = \"%s\"", argv[i]);
+    }
+
     return true;
 }
 
@@ -59,18 +67,16 @@ int main(int argc, char **argv)
 
     CSingleInstanceAuto *inst = csingleinst_new();
     csingleinst_open(inst, sockpath,
-                     (GIOFunc) onSocketInput, NULL);
+                     (GIOFunc) on_socket_input, NULL);
 
     if (!csingleinst_isfirst(inst))
     {
-        char *cmdargs = args_to_str(argc, argv);
+        c_autofree char *cmdargs = args_to_str(argc, argv);
 
         socket_fd_write_all(csingleinst_sock(inst),
                             cmdargs, -1);
 
         socket_fd_close(csingleinst_sock(inst));
-
-        free(cmdargs);
 
         return 0;
     }
