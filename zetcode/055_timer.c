@@ -4,9 +4,9 @@
 
 gchar _buf[256];
 
-gboolean on_draw(GtkWidget *widget, GdkEventExpose *event, gpointer data)
+gboolean on_draw(GtkWidget *widget, cairo_t *cr, gpointer data)
 {
-    (void) event;
+    (void) cr;
     (void) data;
 
     // "convert" the G*t*kWidget to G*d*kWindow (no, it's not a GtkWindow!)
