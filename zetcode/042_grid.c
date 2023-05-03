@@ -7,13 +7,13 @@ void button_clicked(GtkWidget *grid, gpointer data)
 {
     (void) data;
 
-    GList *children = gtk_container_get_children(GTK_CONTAINER(grid));
+    GList *list = gtk_container_get_children(GTK_CONTAINER(grid));
 
     _visible = !_visible;
 
-    while (children != NULL)
+    for (GList *l = list; l != NULL; l = l->next)
     {
-        GtkWidget *widget = children->data;
+        GtkWidget *widget = l->data;
 
         GValue value = G_VALUE_INIT;
         g_value_init(&value, G_TYPE_INT);
@@ -33,11 +33,9 @@ void button_clicked(GtkWidget *grid, gpointer data)
             else
                 gtk_widget_hide(widget);
         }
-
-        children = children->next;
     }
 
-    g_list_free (children);
+    g_list_free (list);
 }
 
 int main(int argc, char **argv)
@@ -56,19 +54,19 @@ int main(int argc, char **argv)
     gtk_container_add(GTK_CONTAINER(window), grid);
     int row = 0;
 
-    GtkWidget *btn = NULL;
+    GtkWidget *item = NULL;
 
-    btn = gtk_button_new_with_label("Button 1");
-    gtk_widget_set_size_request(btn, 50, 30);
-    gtk_grid_attach(GTK_GRID(grid), btn, 0, row, 1, 1);
+    item = gtk_button_new_with_label("Button 1");
+    gtk_widget_set_size_request(item, 50, 30);
+    gtk_grid_attach(GTK_GRID(grid), item, 0, row, 1, 1);
     ++row;
 
-    btn = gtk_button_new_with_label("Button 2");
-    gtk_widget_set_hexpand(btn, TRUE);
-    gtk_widget_set_vexpand(btn, TRUE);
-    gtk_grid_attach(GTK_GRID(grid), btn, 0, row, 2, 1);
+    item = gtk_button_new_with_label("Button 2");
+    gtk_widget_set_hexpand(item, TRUE);
+    gtk_widget_set_vexpand(item, TRUE);
+    gtk_grid_attach(GTK_GRID(grid), item, 0, row, 2, 1);
     ++row;
-    g_signal_connect_swapped(G_OBJECT(btn), "clicked",
+    g_signal_connect_swapped(G_OBJECT(item), "clicked",
                              G_CALLBACK(button_clicked), G_OBJECT(grid));
 
     g_signal_connect(G_OBJECT(window), "destroy",
