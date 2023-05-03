@@ -1,4 +1,43 @@
 #include <gtk/gtk.h>
+#include <stdbool.h>
+
+bool _visible = true;
+
+void button_clicked(GtkWidget *grid, gpointer data)
+{
+    (void) data;
+
+    GList *children = gtk_container_get_children(GTK_CONTAINER(grid));
+
+    _visible = !_visible;
+
+    while (children != NULL)
+    {
+        GtkWidget *widget = children->data;
+
+        GValue value = G_VALUE_INIT;
+        g_value_init(&value, G_TYPE_INT);
+        gtk_container_child_get_property(GTK_CONTAINER(grid), widget,
+                                         "top-attach", &value);
+        int pos = g_value_get_int(&value);
+
+        g_print("name : %s\n", gtk_widget_get_name(widget));
+        g_print("label : %s\n", gtk_button_get_label(GTK_BUTTON(widget)));
+        g_print("pos : %d\n", pos);
+
+        if (pos == 0)
+        {
+            if (_visible)
+                gtk_widget_show(widget);
+            else
+                gtk_widget_hide(widget);
+        }
+
+        children = children->next;
+    }
+
+    g_list_free (children);
+}
 
 int main(int argc, char **argv)
 {
@@ -28,6 +67,8 @@ int main(int argc, char **argv)
     gtk_widget_set_vexpand(btn, TRUE);
     gtk_grid_attach(GTK_GRID(grid), btn, 0, row, 2, 1);
     ++row;
+    g_signal_connect_swapped(G_OBJECT(btn), "clicked",
+                             G_CALLBACK(button_clicked), G_OBJECT(grid));
 
     g_signal_connect(G_OBJECT(window), "destroy",
                      G_CALLBACK(gtk_main_quit), NULL);
