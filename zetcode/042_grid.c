@@ -20,6 +20,7 @@ void button_clicked(GtkWidget *grid, gpointer data)
         gtk_container_child_get_property(GTK_CONTAINER(grid), widget,
                                          "top-attach", &value);
         int pos = g_value_get_int(&value);
+        g_value_unset(&value);
 
         g_print("name : %s\n", gtk_widget_get_name(widget));
         g_print("label : %s\n", gtk_button_get_label(GTK_BUTTON(widget)));

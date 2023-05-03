@@ -18,6 +18,7 @@ SOURCES = \
     samples/01_widgets.c \
     samples/02_toolbar.c \
     samples/cairo_draw.c \
+    samples/gvalue.c \
     samples/object_set.c \
     samples/object_set_data_full.c \
     samples/socket_path.c \
