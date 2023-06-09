@@ -14,7 +14,7 @@ c_args = [
 ]
 
 if get_option('buildtype') == 'plain'
-  c_args += '-O2'
+    c_args += '-O2'
 endif
 
 # examples
