@@ -14,6 +14,7 @@ PKGCONFIG += gtk+-3.0
 
 SOURCES = \
     0Temp.c \
+    gtk3-tutorial/cellrenderertoggle.c \
     main.c \
     samples/01_widgets.c \
     samples/02_toolbar.c \
