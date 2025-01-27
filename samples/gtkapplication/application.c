@@ -41,13 +41,13 @@ G_DEFINE_TYPE(Application, application, GTK_TYPE_APPLICATION)
 
 static void application_class_init(ApplicationClass *klass)
 {
-    GObjectClass *gobject_class = G_OBJECT_CLASS(klass);
-    gobject_class->finalize = _application_finalize;
+    GObjectClass *gobjclass = G_OBJECT_CLASS(klass);
+    gobjclass->finalize = _application_finalize;
 
-    GApplicationClass *gapplication_class = G_APPLICATION_CLASS(klass);
-    gapplication_class->startup = _application_startup;
-    gapplication_class->shutdown = _application_shutdown;
-    gapplication_class->command_line = _application_command_line;
+    GApplicationClass *gappclass = G_APPLICATION_CLASS(klass);
+    gappclass->startup = _application_startup;
+    gappclass->shutdown = _application_shutdown;
+    gappclass->command_line = _application_command_line;
 }
 
 static void application_init(Application *application)
