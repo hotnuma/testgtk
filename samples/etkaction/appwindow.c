@@ -1,7 +1,6 @@
 #include "appwindow.h"
-
-#include <etkwidget.h>
 #include <etkaction.h>
+#include "config.h"
 
 static void _window_dispose(GObject *object);
 static void _window_finalize(GObject *object);
@@ -30,7 +29,7 @@ G_DEFINE_TYPE(AppWindow, window, GTK_TYPE_WINDOW)
 static EtkActionEntry _window_actions[] =
 {
     {APP_WINDOW_ACTION_FILE_MENU,
-     "<Actions>/AppWindow/file-menu",
+     "<Actions>/AppWindow/File",
      "",
      ETK_MENU_ITEM,
      N_("_File"),
@@ -39,7 +38,7 @@ static EtkActionEntry _window_actions[] =
      NULL},
 
     {APP_WINDOW_ACTION_FILE_OPEN,
-     "<Actions>/AppWindow/file-open",
+     "<Actions>/AppWindow/FileOpen",
      "<Primary>o",
      ETK_IMAGE_MENU_ITEM,
      N_("_Open"),
@@ -93,10 +92,11 @@ static void window_init(AppWindow *window)
 
 static gboolean _window_on_delete(GtkWidget *widget, GdkEvent *event, gpointer data)
 {
+    (void) widget;
     (void) event;
     (void) data;
 
-    if (etk_window_is_last(GTK_WINDOW(widget)))
+    //if (etk_window_is_last(GTK_WINDOW(widget)))
         gtk_main_quit();
 
     return false;
@@ -161,9 +161,9 @@ static void _window_create_toolbar(AppWindow *window)
     window->toolbar = gtk_toolbar_new();
 
     etk_tool_button_new_from_action(GTK_TOOLBAR(window->toolbar),
-                                                APP_WINDOW_ACTION_FILE_OPEN,
-                                                _window_actions,
-                                                G_OBJECT(window));
+                                    APP_WINDOW_ACTION_FILE_OPEN,
+                                    _window_actions,
+                                    G_OBJECT(window));
 
     gtk_widget_show_all(window->toolbar);
 }

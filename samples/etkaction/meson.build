@@ -1,5 +1,5 @@
 project(
-    'etkaction',
+    'testui',
     ['c'],
     version : '1.0',
     license : 'GPL-2.0',
@@ -19,7 +19,7 @@ endif
 
 app_deps = [
     dependency('gtk+-3.0'),
-    dependency('tinyc'),
+    dependency('tinyui'),
 ]
 
 app_src = [

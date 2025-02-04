@@ -1,17 +1,16 @@
 TEMPLATE = app
-TARGET = etkaction
+TARGET = testui
 CONFIG = c99 link_pkgconfig
+
 DEFINES =
 INCLUDEPATH =
-PKGCONFIG =
-
 PKGCONFIG += gtk+-3.0
-PKGCONFIG += tinyc
+PKGCONFIG += tinyui
 #PKGCONFIG += glib-2.0
 #PKGCONFIG += dbus-1
 #PKGCONFIG += libxml-2.0
 
-HEADERS += \
+HEADERS = \
     appwindow.h \
     config.h \
 
@@ -20,8 +19,7 @@ SOURCES = \
     appwindow.c \
     main.c \
 
-DISTFILES += \
-    data/applist.desktop \
+DISTFILES = \
     install.sh \
     License.txt \
     meson.build \
