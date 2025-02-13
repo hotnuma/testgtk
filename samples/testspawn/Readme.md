@@ -1,4 +1,0 @@
-
-Geany Spawn Functions
-
-
